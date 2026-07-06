@@ -1,0 +1,4 @@
+[
+  { "id": "w1", "patientName": "Nadia Ferjani", "patientAvatar": "NF", "careLabel": "Détartrage", "priority": "high", "reason": "Créneau libéré suite annulation du 3 juillet", "waitingSince": "3 jours" },
+  { "id": "w2", "patientName": "Bilel Jendoubi", "patientAvatar": "BJ", "careLabel": "Contrôle orthodontique", "priority": "medium", "reason": "Souhaite un créneau plus tôt que celui proposé", "waitingSince": "6 jours" }
+]

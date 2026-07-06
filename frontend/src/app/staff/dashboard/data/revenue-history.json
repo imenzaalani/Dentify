@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-03-23",
+    "consultations": 174,
+    "treatments": 404
+  },
+  {
+    "date": "2026-04-15",
+    "consultations": 188,
+    "treatments": 390
+  },
+  {
+    "date": "2026-05-10",
+    "consultations": 210,
+    "treatments": 412
+  },
+  {
+    "date": "2026-06-05",
+    "consultations": 220,
+    "treatments": 385
+  },
+  {
+    "date": "2026-06-30",
+    "consultations": 227,
+    "treatments": 373
+  },
+  {
+    "date": "2026-07-01",
+    "consultations": 232,
+    "treatments": 398
+  }
+]

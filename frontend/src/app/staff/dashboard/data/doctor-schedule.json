@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "time": "08:00",
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "patientId": 1,
+    "reason": "Douleur molaire inférieure droite",
+    "type": "Check-up",
+    "status": "Completed"
+  },
+  {
+    "id": 2,
+    "time": "09:00",
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "patientId": 3,
+    "reason": "Suivi plombage, sensibilité au froid",
+    "type": "Filling",
+    "status": "In Progress"
+  },
+  {
+    "id": 3,
+    "time": "10:00",
+    "patientName": "Sami Bouazizi",
+    "patientAvatar": "SB",
+    "patientId": 5,
+    "reason": "Contrôle de routine + détartrage",
+    "type": "Check-up",
+    "status": "Confirmed"
+  },
+  {
+    "id": 4,
+    "time": "11:30",
+    "patientName": "Rania Gharbi",
+    "patientAvatar": "RG",
+    "patientId": 6,
+    "reason": "Douleur à la mastication, dent 26",
+    "type": "Consultation",
+    "status": "Confirmed"
+  },
+  {
+    "id": 5,
+    "time": "14:00",
+    "patientName": "Amine Kacem",
+    "patientAvatar": "AK",
+    "patientId": 7,
+    "reason": "Pose de couronne provisoire",
+    "type": "Crown Fitting",
+    "status": "Confirmed"
+  },
+  {
+    "id": 6,
+    "time": "15:30",
+    "patientName": "Ines Mabrouk",
+    "patientAvatar": "IM",
+    "patientId": 8,
+    "reason": "Première consultation, sensibilité générale",
+    "type": "Consultation",
+    "status": "Waiting"
+  }
+]

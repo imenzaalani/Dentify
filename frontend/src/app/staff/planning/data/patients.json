@@ -1,0 +1,8 @@
+[
+  { "id": "p1", "firstName": "Mohamed", "lastName": "Gharbi", "initials": "MG", "phone": "+216 20 123 456", "email": "mohamed.gharbi@example.com" },
+  { "id": "p2", "firstName": "Yasmine", "lastName": "Cherif", "initials": "YC", "phone": "+216 22 456 789", "email": "yasmine.cherif@example.com" },
+  { "id": "p3", "firstName": "Ahmed", "lastName": "Bouazizi", "initials": "AB", "phone": "+216 24 789 123", "email": "ahmed.bouazizi@example.com" },
+  { "id": "p4", "firstName": "Nour", "lastName": "Hammami", "initials": "NH", "phone": "+216 26 321 654", "email": "nour.hammami@example.com" },
+  { "id": "p5", "firstName": "Ines", "lastName": "Khelifi", "initials": "IK", "phone": "+216 21 654 987", "email": "ines.khelifi@example.com" },
+  { "id": "p6", "firstName": "Walid", "lastName": "Saidi", "initials": "WS", "phone": "+216 23 987 321", "email": "walid.saidi@example.com" }
+]

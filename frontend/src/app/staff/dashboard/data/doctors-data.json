@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Yassine Trabelsi",
+    "specialty": "Dentiste Généraliste",
+    "color": "#2563eb",
+    "status": "Active",
+    "offDays": []
+  },
+  {
+    "id": 2,
+    "name": "Nadia Ferjani",
+    "specialty": "Parodontiste",
+    "color": "#0d9488",
+    "status": "Active",
+    "offDays": []
+  },
+  {
+    "id": 3,
+    "name": "Amel Ben Salah",
+    "specialty": "Orthodontiste",
+    "color": "#16a34a",
+    "status": "Active",
+    "offDays": ["Wednesday"]
+  },
+  {
+    "id": 4,
+    "name": "Karim Jaziri",
+    "specialty": "Chirurgien-Dentiste",
+    "color": "#f59e0b",
+    "status": "Active",
+    "offDays": []
+  },
+  {
+    "id": 5,
+    "name": "Mehdi Cherni",
+    "specialty": "Endodontiste",
+    "color": "#dc2626",
+    "status": "Inactive",
+    "offDays": []
+  }
+]

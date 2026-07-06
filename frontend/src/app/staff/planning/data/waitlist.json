@@ -1,0 +1,46 @@
+[
+  {
+    "id": "w1",
+    "patientId": "p6",
+    "patientName": "Nadia Ferjani",
+    "careTypeId": "orthodontie-suivi",
+    "desiredDateRange": { "from": "2026-07-06", "to": "2026-07-10" },
+    "priority": "high",
+    "status": "waiting",
+    "notes": "Créneau libéré suite à une annulation, rappeler en priorité.",
+    "createdAt": "2026-07-02"
+  },
+  {
+    "id": "w2",
+    "patientId": "p2",
+    "patientName": "Karim Trabelsi",
+    "careTypeId": "detartrage",
+    "desiredDateRange": { "from": "2026-07-08", "to": "2026-07-15" },
+    "priority": "medium",
+    "status": "waiting",
+    "notes": "Souhaite un créneau en fin de journée si possible.",
+    "createdAt": "2026-06-29"
+  },
+  {
+    "id": "w3",
+    "patientId": "p4",
+    "patientName": "Yosr Ammar",
+    "careTypeId": "consultation",
+    "desiredDateRange": { "from": "2026-07-05", "to": "2026-07-06" },
+    "priority": "high",
+    "status": "contacted",
+    "notes": "Contactée le 3 juillet, en attente de confirmation de sa part.",
+    "createdAt": "2026-06-30"
+  },
+  {
+    "id": "w4",
+    "patientId": "p1",
+    "patientName": "Amira Bouzid",
+    "careTypeId": "blanchiment",
+    "desiredDateRange": { "from": "2026-07-20", "to": "2026-07-31" },
+    "priority": "low",
+    "status": "waiting",
+    "notes": "",
+    "createdAt": "2026-06-25"
+  }
+]

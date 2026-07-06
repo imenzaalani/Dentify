@@ -1,0 +1,5 @@
+[
+  { "id": 1, "patientName": "Walid Hamdi", "patientAvatar": "WH", "invoiceNumber": "FAC-2026-014", "amountDue": 150, "status": "Unpaid" },
+  { "id": 2, "patientName": "Yosr Ammar", "patientAvatar": "YA", "invoiceNumber": "FAC-2026-017", "amountDue": 320, "status": "Partially Paid" },
+  { "id": 3, "patientName": "Karim Trabelsi", "patientAvatar": "KT", "invoiceNumber": "FAC-2026-021", "amountDue": 90, "status": "Unpaid" }
+]

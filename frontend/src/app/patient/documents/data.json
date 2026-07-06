@@ -1,0 +1,60 @@
+{
+  "documents": [
+    {
+      "id": "d1",
+      "title": "Treatment quote — orthodontic plan",
+      "category": "quote",
+      "date": "2026-03-12",
+      "isNew": false
+    },
+    {
+      "id": "d2",
+      "title": "Prescription — post-placement pain relief",
+      "category": "prescription",
+      "date": "2026-04-14",
+      "isNew": false
+    },
+    {
+      "id": "d3",
+      "title": "Panoramic X-ray",
+      "category": "xray",
+      "date": "2026-03-10",
+      "isNew": false
+    },
+    {
+      "id": "d4",
+      "title": "Visit report — June progress check",
+      "category": "report",
+      "date": "2026-06-09",
+      "isNew": true
+    },
+    {
+      "id": "d5",
+      "title": "Invoice #INV-2026-0512",
+      "category": "invoice",
+      "date": "2026-05-12",
+      "isNew": true
+    },
+    {
+      "id": "d6",
+      "title": "Invoice #INV-2026-0414",
+      "category": "invoice",
+      "date": "2026-04-14",
+      "isNew": false
+    },
+    {
+      "id": "d7",
+      "title": "Post-op care instructions",
+      "category": "other",
+      "date": "2026-04-14",
+      "isNew": false
+    },
+    {
+      "id": "d_consent1",
+      "title": "Signed consent — wisdom tooth extraction",
+      "category": "consent",
+      "date": "2026-05-02",
+      "isNew": false
+    }
+  ]
+}

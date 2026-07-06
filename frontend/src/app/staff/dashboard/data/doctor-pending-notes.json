@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "patientId": 1,
+    "procedure": "Check-up",
+    "seenAt": "Aujourd'hui, 08:00",
+    "daysWaiting": 0
+  },
+  {
+    "id": 2,
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "patientId": 2,
+    "procedure": "Scaling",
+    "seenAt": "Hier, 16:30",
+    "daysWaiting": 1
+  },
+  {
+    "id": 3,
+    "patientName": "Nour Jendoubi",
+    "patientAvatar": "NJ",
+    "patientId": 4,
+    "procedure": "Root Canal — séance 2",
+    "seenAt": "Il y a 2 jours",
+    "daysWaiting": 2
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "number": "INV-1001",
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "total": 220,
+    "status": "Paid",
+    "issueDate": "Jun 29, 2026"
+  },
+  {
+    "id": 2,
+    "number": "INV-1002",
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "total": 45,
+    "status": "Sent",
+    "issueDate": "Jun 30, 2026"
+  },
+  {
+    "id": 3,
+    "number": "INV-1003",
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "total": 120,
+    "status": "Overdue",
+    "issueDate": "Jul 01, 2026"
+  },
+  {
+    "id": 4,
+    "number": "INV-1004",
+    "patientName": "Yosr Ammar",
+    "patientAvatar": "YA",
+    "total": 180,
+    "status": "Partially Paid",
+    "issueDate": "Jul 02, 2026"
+  },
+  {
+    "id": 5,
+    "number": "INV-1005",
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "total": 60,
+    "status": "Draft",
+    "issueDate": "Jul 03, 2026"
+  }
+]

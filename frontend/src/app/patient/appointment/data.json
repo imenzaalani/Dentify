@@ -1,0 +1,53 @@
+{
+  "minCancelNoticeHours": 24,
+  "appointments": [
+    {
+      "id": "a1",
+      "date": "2026-07-14",
+      "time": "10:00",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Bracket adjustment",
+      "status": "confirmed"
+    },
+    {
+      "id": "a2",
+      "date": "2026-07-25",
+      "time": "16:30",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Progress check",
+      "status": "pending"
+    },
+    {
+      "id": "a3",
+      "date": "2026-06-09",
+      "time": "09:30",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Adjustment & progress check",
+      "status": "completed"
+    },
+    {
+      "id": "a4",
+      "date": "2026-05-12",
+      "time": "11:00",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Adjustment — first tightening",
+      "status": "completed"
+    },
+    {
+      "id": "a5",
+      "date": "2026-04-14",
+      "time": "14:00",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Braces placement",
+      "status": "completed"
+    },
+    {
+      "id": "a6",
+      "date": "2026-03-24",
+      "time": "10:30",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "type": "Dental impressions & scan",
+      "status": "cancelled"
+    }
+  ]
+}

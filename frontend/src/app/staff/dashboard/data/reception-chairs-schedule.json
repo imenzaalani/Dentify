@@ -1,0 +1,8 @@
+[
+  { "id": 1, "resourceId": "chair-1", "time": "09:30", "patientName": "Amira Bouzid", "doctorName": "Dr. Amine", "status": "Arrivé" },
+  { "id": 2, "resourceId": "chair-1", "time": "11:15", "patientName": "Sami Gharbi", "doctorName": "Dr. Amine", "status": "En attente" },
+  { "id": 3, "resourceId": "chair-2", "time": "10:00", "patientName": "Rania Cherni", "doctorName": "Dr. Sarra", "status": "Confirmé" },
+  { "id": 4, "resourceId": "chair-2", "time": "14:00", "patientName": "Yosr Ammar", "doctorName": "Dr. Sarra", "status": "Confirmé" },
+  { "id": 5, "resourceId": "room-1", "time": "11:00", "patientName": "Mehdi Slim", "doctorName": "Dr. Karim", "status": "Arrivé" },
+  { "id": 6, "resourceId": "room-1", "time": "15:30", "patientName": "Youssef Baccouche", "doctorName": "Dr. Karim", "status": "En attente" }
+]

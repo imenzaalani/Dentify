@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "procedure": "Check-up",
+    "status": "Completed",
+    "nextAppointment": "—",
+    "balance": "0 TND",
+    "doctor": "Yassine Trabelsi"
+  },
+  {
+    "id": 2,
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "procedure": "Scaling",
+    "status": "Completed",
+    "nextAppointment": "—",
+    "balance": "45 TND",
+    "doctor": "Nadia Ferjani"
+  },
+  {
+    "id": 3,
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "procedure": "Filling",
+    "status": "In Treatment",
+    "nextAppointment": "Today, 11:00",
+    "balance": "120 TND",
+    "doctor": "Yassine Trabelsi"
+  },
+  {
+    "id": 4,
+    "patientName": "Yosr Ammar",
+    "patientAvatar": "YA",
+    "procedure": "Orthodontic Adjustment",
+    "status": "Scheduled",
+    "nextAppointment": "Today, 13:00",
+    "balance": "0 TND",
+    "doctor": "Amel Ben Salah"
+  },
+  {
+    "id": 5,
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "procedure": "Consultation",
+    "status": "Scheduled",
+    "nextAppointment": "Today, 14:30",
+    "balance": "60 TND",
+    "doctor": "Karim Jaziri"
+  },
+  {
+    "id": 6,
+    "patientName": "Hedi Ktari",
+    "patientAvatar": "HK",
+    "procedure": "Extraction",
+    "status": "Scheduled",
+    "nextAppointment": "Today, 16:00",
+    "balance": "90 TND",
+    "doctor": "Karim Jaziri"
+  },
+  {
+    "id": 7,
+    "patientName": "Sami Ayari",
+    "patientAvatar": "SA",
+    "procedure": "Root Canal",
+    "status": "Overdue",
+    "nextAppointment": "Jun 24, 2026",
+    "balance": "250 TND",
+    "doctor": "Nadia Ferjani"
+  },
+  {
+    "id": 8,
+    "patientName": "Rania Belhadj",
+    "patientAvatar": "RB",
+    "procedure": "Whitening",
+    "status": "Scheduled",
+    "nextAppointment": "Jul 8, 2026",
+    "balance": "0 TND",
+    "doctor": "Yassine Trabelsi"
+  }
+]

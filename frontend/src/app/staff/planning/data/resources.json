@@ -1,0 +1,5 @@
+[
+  { "id": "chair-1", "name": "Fauteuil 1", "type": "chair", "active": true },
+  { "id": "chair-2", "name": "Fauteuil 2", "type": "chair", "active": true },
+  { "id": "room-1", "name": "Salle de chirurgie", "type": "room", "active": true }
+]

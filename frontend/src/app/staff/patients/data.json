@@ -1,0 +1,291 @@
+[
+  {
+    "id": 1,
+    "firstName": "Amira",
+    "lastName": "Bouzid",
+    "avatar": "AB",
+    "phone": "+216 22 345 678",
+    "phoneSecondary": "",
+    "email": "amira.bouzid@example.com",
+    "address": "12 Rue de Marseille, Tunis",
+    "dob": "1990-04-12",
+    "gender": "F",
+    "bloodType": "O+",
+    "allergies": [
+      "Pénicilline"
+    ],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "",
+    "emergencyContactName": "Sami Bouzid",
+    "emergencyContactPhone": "+216 98 111 222",
+    "lastAppointment": "2026-06-18",
+    "nextAppointment": {
+      "date": "2026-07-05",
+      "type": "Cleaning"
+    },
+    "activeTreatment": {
+      "active": true,
+      "name": "Orthodontic Treatment"
+    },
+    "accountStatus": "active",
+    "status": "Active",
+    "createdAt": "2024-02-10",
+    "patientStatus": "new",
+    "preferredChannel": "whatsapp"
+  },
+  {
+    "id": 2,
+    "firstName": "Karim",
+    "lastName": "Trabelsi",
+    "avatar": "KT",
+    "phone": "+216 55 678 912",
+    "phoneSecondary": "+216 71 234 567",
+    "email": "karim.trabelsi@example.com",
+    "address": "Avenue Habib Bourguiba, Sousse",
+    "dob": "1985-11-02",
+    "gender": "M",
+    "bloodType": "A+",
+    "allergies": [],
+    "chronicConditions": "Diabète type 2",
+    "currentMedications": "Metformine",
+    "medicalHistory": "",
+    "emergencyContactName": "Leila Trabelsi",
+    "emergencyContactPhone": "+216 98 333 444",
+    "lastAppointment": "2026-05-02",
+    "nextAppointment": null,
+    "activeTreatment": {
+      "active": false
+    },
+    "accountStatus": "no_account",
+    "status": "Active",
+    "createdAt": "2023-09-01",
+    "patientStatus": "active",
+    "preferredChannel": "email"
+  },
+  {
+    "id": 3,
+    "firstName": "Sarra",
+    "lastName": "Mejri",
+    "avatar": "SM",
+    "phone": "+216 24 789 321",
+    "phoneSecondary": "",
+    "email": "sarra.mejri@example.com",
+    "address": "Rue Ibn Khaldoun, Ariana",
+    "dob": "2001-07-22",
+    "gender": "F",
+    "bloodType": "B-",
+    "allergies": [
+      "Latex"
+    ],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "Extraction dent de sagesse 2022",
+    "emergencyContactName": "Nour Mejri",
+    "emergencyContactPhone": "+216 99 555 666",
+    "lastAppointment": "2026-06-25",
+    "nextAppointment": {
+      "date": "2026-07-02",
+      "type": "Root Canal"
+    },
+    "activeTreatment": {
+      "active": true,
+      "name": "Endodontic Treatment"
+    },
+    "accountStatus": "active",
+    "status": "Active",
+    "createdAt": "2025-01-15",
+    "patientStatus": "active",
+    "preferredChannel": "sms"
+  },
+  {
+    "id": 4,
+    "firstName": "Walid",
+    "lastName": "Hamdi",
+    "avatar": "WH",
+    "phone": "+216 27 456 123",
+    "phoneSecondary": "",
+    "email": "walid.hamdi@example.com",
+    "address": "Cité Ennasr, Tunis",
+    "dob": "1978-03-30",
+    "gender": "M",
+    "bloodType": "AB+",
+    "allergies": [],
+    "chronicConditions": "Hypertension",
+    "currentMedications": "Amlodipine",
+    "medicalHistory": "",
+    "emergencyContactName": "Mona Hamdi",
+    "emergencyContactPhone": "+216 96 777 888",
+    "lastAppointment": "2026-02-14",
+    "nextAppointment": null,
+    "activeTreatment": {
+      "active": false
+    },
+    "accountStatus": "no_account",
+    "status": "Archived",
+    "createdAt": "2022-06-20",
+    "patientStatus": "archived",
+    "preferredChannel": "whatsapp"
+  },
+  {
+    "id": 5,
+    "firstName": "Ines",
+    "lastName": "Charfi",
+    "avatar": "IC",
+    "phone": "+216 20 159 753",
+    "phoneSecondary": "",
+    "email": "ines.charfi@example.com",
+    "address": "Rue de Palestine, Sfax",
+    "dob": "1995-09-09",
+    "gender": "F",
+    "bloodType": "O-",
+    "allergies": [
+      "Aspirine",
+      "Iode"
+    ],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "",
+    "emergencyContactName": "Yassine Charfi",
+    "emergencyContactPhone": "+216 92 246 813",
+    "lastAppointment": "2026-06-29",
+    "nextAppointment": {
+      "date": "2026-07-10",
+      "type": "Implant Consultation"
+    },
+    "activeTreatment": {
+      "active": true,
+      "name": "Implant Placement"
+    },
+    "accountStatus": "active",
+    "status": "Active",
+    "createdAt": "2024-11-03",
+    "patientStatus": "new",
+    "preferredChannel": "email"
+  },
+  {
+    "id": 6,
+    "firstName": "Bilel",
+    "lastName": "Jaziri",
+    "avatar": "BJ",
+    "phone": "+216 23 951 357",
+    "phoneSecondary": "",
+    "email": "bilel.jaziri@example.com",
+    "address": "Rue Charles de Gaulle, Bizerte",
+    "dob": "2010-01-18",
+    "gender": "M",
+    "bloodType": "A-",
+    "allergies": [],
+    "chronicConditions": "Asthme",
+    "currentMedications": "Ventoline",
+    "medicalHistory": "",
+    "emergencyContactName": "Fatma Jaziri",
+    "emergencyContactPhone": "+216 97 159 753",
+    "lastAppointment": "2026-04-11",
+    "nextAppointment": {
+      "date": "2026-07-08",
+      "type": "Check-up"
+    },
+    "activeTreatment": {
+      "active": false
+    },
+    "accountStatus": "no_account",
+    "status": "Active",
+    "createdAt": "2023-03-12",
+    "patientStatus": "active",
+    "preferredChannel": "sms"
+  },
+  {
+    "id": 7,
+    "firstName": "Nadia",
+    "lastName": "Gharbi",
+    "avatar": "NG",
+    "phone": "+216 26 357 951",
+    "phoneSecondary": "+216 71 987 654",
+    "email": "nadia.gharbi@example.com",
+    "address": "La Marsa, Tunis",
+    "dob": "1988-12-25",
+    "gender": "F",
+    "bloodType": "B+",
+    "allergies": [],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "",
+    "emergencyContactName": "Hedi Gharbi",
+    "emergencyContactPhone": "+216 98 753 159",
+    "lastAppointment": "2025-12-20",
+    "nextAppointment": null,
+    "activeTreatment": {
+      "active": false
+    },
+    "accountStatus": "active",
+    "status": "Archived",
+    "createdAt": "2021-08-05",
+    "patientStatus": "archived",
+    "preferredChannel": "whatsapp"
+  },
+  {
+    "id": 8,
+    "firstName": "Mehdi",
+    "lastName": "Slim",
+    "avatar": "MS",
+    "phone": "+216 29 753 951",
+    "phoneSecondary": "",
+    "email": "mehdi.slim@example.com",
+    "address": "Rue de Russie, Tunis",
+    "dob": "1999-06-14",
+    "gender": "M",
+    "bloodType": "O+",
+    "allergies": [
+      "Pénicilline"
+    ],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "",
+    "emergencyContactName": "Rim Slim",
+    "emergencyContactPhone": "+216 99 951 753",
+    "lastAppointment": "2026-06-30",
+    "nextAppointment": {
+      "date": "2026-07-01",
+      "type": "Filling"
+    },
+    "activeTreatment": {
+      "active": true,
+      "name": "Cavity Treatment"
+    },
+    "accountStatus": "no_account",
+    "status": "Active",
+    "createdAt": "2025-04-22",
+    "patientStatus": "recall",
+    "preferredChannel": "email"
+  },
+  {
+    "id": 9,
+    "firstName": "Sami",
+    "lastName": "Gharbi",
+    "avatar": "SG",
+    "phone": "+216 20 123 456",
+    "phoneSecondary": "",
+    "email": "",
+    "address": "",
+    "dob": "1988-11-02",
+    "gender": "M",
+    "bloodType": "",
+    "allergies": [],
+    "chronicConditions": "",
+    "currentMedications": "",
+    "medicalHistory": "",
+    "emergencyContactName": "",
+    "emergencyContactPhone": "",
+    "lastAppointment": null,
+    "nextAppointment": null,
+    "activeTreatment": {
+      "active": false
+    },
+    "accountStatus": "no_account",
+    "status": "Active",
+    "createdAt": "2026-07-04",
+    "patientStatus": "lead",
+    "preferredChannel": "whatsapp"
+  }
+]

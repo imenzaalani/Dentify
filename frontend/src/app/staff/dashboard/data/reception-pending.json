@@ -1,0 +1,5 @@
+[
+  { "id": 1, "time": "09:30", "patientName": "Sami Gharbi", "patientAvatar": "SG", "phone": "+216 20 123 456", "careLabel": "Consultation", "doctorName": "Dr. Amine", "isLead": true, "requestedAt": "Hier, 18:42" },
+  { "id": 2, "time": "11:00", "patientName": "Rania Cherni", "patientAvatar": "RC", "phone": "+216 22 987 654", "careLabel": "Détartrage", "doctorName": "Dr. Sarra", "isLead": false, "requestedAt": "Aujourd'hui, 08:05" },
+  { "id": 3, "time": "15:30", "patientName": "Youssef Baccouche", "patientAvatar": "YB", "phone": "+216 25 741 852", "careLabel": "Extraction", "doctorName": "Dr. Karim", "isLead": true, "requestedAt": "Aujourd'hui, 09:20" }
+]

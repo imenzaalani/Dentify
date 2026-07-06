@@ -1,0 +1,16 @@
+{
+  "personal": {
+    "firstName": "Mina",
+    "lastName": "Patient",
+    "email": "patient@example.com",
+    "phone": "+216 20 123 456",
+    "address": "12 Rue de la Liberté, Tunis"
+  },
+  "medical": {
+    "allergies": "Penicillin",
+    "ongoingTreatments": "None",
+    "history": "Wisdom tooth extraction (2022)"
+  },
+  "twoFactorEnabled": false,
+  "preferredChannel": "whatsapp"
+}

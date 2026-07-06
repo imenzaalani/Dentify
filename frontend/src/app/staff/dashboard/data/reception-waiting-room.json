@@ -1,0 +1,4 @@
+[
+  { "id": 1, "patientName": "Amira Bouzid", "patientAvatar": "AB", "arrivedAt": "09:12", "waitMinutes": 23, "appointmentTime": "09:30", "doctorName": "Dr. Amine", "resourceName": "Fauteuil 1" },
+  { "id": 2, "patientName": "Mehdi Slim", "patientAvatar": "MS", "arrivedAt": "10:48", "waitMinutes": 7, "appointmentTime": "11:00", "doctorName": "Dr. Karim", "resourceName": "Salle de chirurgie" }
+]

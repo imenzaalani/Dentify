@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "patientName": "Amira Bouzid",
+    "patientAvatar": "AB",
+    "patientId": 1,
+    "title": "Orthodontic Treatment",
+    "nextStep": "Progress check + rewire",
+    "tooth": "Full arch",
+    "estDuration": 30
+  },
+  {
+    "id": 2,
+    "patientName": "Sami Bouazizi",
+    "patientAvatar": "SB",
+    "patientId": 5,
+    "title": "Root Canal Treatment",
+    "nextStep": "Obturation canalaire",
+    "tooth": "36",
+    "estDuration": 45
+  },
+  {
+    "id": 3,
+    "patientName": "Ines Mabrouk",
+    "patientAvatar": "IM",
+    "patientId": 8,
+    "title": "Crown & Bridge",
+    "nextStep": "Empreinte définitive",
+    "tooth": "26",
+    "estDuration": 40
+  }
+]

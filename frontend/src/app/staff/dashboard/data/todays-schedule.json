@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "time": "08:00",
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "doctorName": "Yassine Trabelsi",
+    "doctorColor": "#2563eb",
+    "type": "Check-up",
+    "status": "Completed"
+  },
+  {
+    "id": 2,
+    "time": "09:30",
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "doctorName": "Nadia Ferjani",
+    "doctorColor": "#0d9488",
+    "type": "Scaling",
+    "status": "Completed"
+  },
+  {
+    "id": 3,
+    "time": "11:00",
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "doctorName": "Yassine Trabelsi",
+    "doctorColor": "#2563eb",
+    "type": "Filling",
+    "status": "In Progress"
+  },
+  {
+    "id": 4,
+    "time": "13:00",
+    "patientName": "Yosr Ammar",
+    "patientAvatar": "YA",
+    "doctorName": "Amel Ben Salah",
+    "doctorColor": "#16a34a",
+    "type": "Orthodontic Adjustment",
+    "status": "Confirmed"
+  },
+  {
+    "id": 5,
+    "time": "14:30",
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "doctorName": "Karim Jaziri",
+    "doctorColor": "#f59e0b",
+    "type": "Consultation",
+    "status": "Confirmed"
+  },
+  {
+    "id": 6,
+    "time": "16:00",
+    "patientName": "Hedi Ktari",
+    "patientAvatar": "HK",
+    "doctorName": "Karim Jaziri",
+    "doctorColor": "#f59e0b",
+    "type": "Extraction",
+    "status": "Waiting"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "patientId": 1,
+    "patientName": "Amira Bouzid",
+    "patientAvatar": "AB",
+    "specialistName": "Dr. Fares Ayadi",
+    "specialty": "Orthodontics",
+    "reason": "Severe crowding requiring bracket therapy beyond general practice scope.",
+    "date": "2026-06-20",
+    "status": "Completed",
+    "notes": "Specialist confirmed treatment plan already in progress in-house.",
+    "createdAt": "2026-06-15"
+  },
+  {
+    "id": 2,
+    "patientId": 3,
+    "patientName": "Sarra Mejri",
+    "patientAvatar": "SM",
+    "specialistName": "Dr. Yassine Kammoun",
+    "specialty": "Endodontics",
+    "reason": "Persistent pain on tooth 46, suspected complex canal anatomy.",
+    "date": "2026-06-28",
+    "status": "Sent",
+    "notes": "Referral letter and radiographs sent by email.",
+    "createdAt": "2026-06-27"
+  },
+  {
+    "id": 3,
+    "patientId": 5,
+    "patientName": "Ines Charfi",
+    "patientAvatar": "IC",
+    "specialistName": "Dr. Nabil Chaabane",
+    "specialty": "Oral Surgery",
+    "reason": "Impacted lower third molars, extraction under specialist care recommended.",
+    "date": "2026-07-02",
+    "status": "Pending",
+    "notes": "",
+    "createdAt": "2026-07-01"
+  },
+  {
+    "id": 4,
+    "patientId": 7,
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "specialistName": "Dr. Sana Bel Haj",
+    "specialty": "Periodontics",
+    "reason": "Advanced periodontal pocketing, scaling not sufficient.",
+    "date": "2026-06-10",
+    "status": "Completed",
+    "notes": "Patient completed deep scaling and root planing with specialist.",
+    "createdAt": "2026-06-01"
+  },
+  {
+    "id": 5,
+    "patientId": 8,
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "specialistName": "Dr. Rania Ferjani",
+    "specialty": "Prosthodontics",
+    "reason": "Full arch rehabilitation candidate, needs prosthodontic evaluation.",
+    "date": "2026-05-30",
+    "status": "Cancelled",
+    "notes": "Patient postponed treatment for financial reasons.",
+    "createdAt": "2026-05-20"
+  },
+  {
+    "id": 6,
+    "patientId": 2,
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "specialistName": "Dr. Olfa Mrad",
+    "specialty": "Pediatric Dentistry",
+    "reason": "Behavioral management needed for child's treatment under sedation.",
+    "date": "2026-07-03",
+    "status": "Pending",
+    "notes": "",
+    "createdAt": "2026-07-03"
+  },
+  {
+    "id": 7,
+    "patientId": 6,
+    "patientName": "Bilel Jaziri",
+    "patientAvatar": "BJ",
+    "specialistName": "Dr. Fares Ayadi",
+    "specialty": "Orthodontics",
+    "reason": "Class III malocclusion, surgical-orthodontic evaluation.",
+    "date": "2026-06-05",
+    "status": "Sent",
+    "notes": "Awaiting specialist appointment confirmation.",
+    "createdAt": "2026-06-04"
+  }
+]

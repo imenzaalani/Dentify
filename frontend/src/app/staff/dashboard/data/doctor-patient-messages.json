@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "patientName": "Rania Gharbi",
+    "patientAvatar": "RG",
+    "patientId": 6,
+    "preview": "La douleur persiste depuis l'obturation, est-ce normal ?",
+    "receivedAt": "il y a 32 min"
+  },
+  {
+    "id": 2,
+    "patientName": "Amine Kacem",
+    "patientAvatar": "AK",
+    "patientId": 7,
+    "preview": "Puis-je reprendre une alimentation normale après la pose de la couronne ?",
+    "receivedAt": "il y a 2 h"
+  },
+  {
+    "id": 3,
+    "patientName": "Nour Jendoubi",
+    "patientAvatar": "NJ",
+    "patientId": 4,
+    "preview": "Léger gonflement depuis hier soir, dois-je m'inquiéter ?",
+    "receivedAt": "il y a 5 h"
+  }
+]

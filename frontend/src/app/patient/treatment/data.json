@@ -1,0 +1,82 @@
+{
+  "treatment": {
+    "name": "Orthodontic Treatment",
+    "progressPct": 62,
+    "completedSteps": 5,
+    "totalSteps": 8
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "date": "2026-03-10",
+      "procedure": "Initial consultation & X-rays",
+      "tooth": "Full mouth",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": "Treatment plan discussed. Braces recommended, 18-24 month estimate.",
+      "status": "done"
+    },
+    {
+      "id": "s2",
+      "date": "2026-03-24",
+      "procedure": "Dental impressions & scan",
+      "tooth": "Full mouth",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": "Impressions taken for custom bracket planning.",
+      "status": "done"
+    },
+    {
+      "id": "s3",
+      "date": "2026-04-14",
+      "procedure": "Braces placement",
+      "tooth": "Upper & lower arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": "Brackets placed. Mild discomfort expected for 3-5 days.",
+      "status": "done"
+    },
+    {
+      "id": "s4",
+      "date": "2026-05-12",
+      "procedure": "Adjustment — first tightening",
+      "tooth": "Upper & lower arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": "Wires tightened, tracking well with the plan.",
+      "status": "done"
+    },
+    {
+      "id": "s5",
+      "date": "2026-06-09",
+      "procedure": "Adjustment & progress check",
+      "tooth": "Upper & lower arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": "Good progress, minor spacing correction on the lower arch.",
+      "status": "done"
+    },
+    {
+      "id": "s6",
+      "date": "2026-07-14",
+      "procedure": "Bracket adjustment",
+      "tooth": "Upper arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": null,
+      "status": "next"
+    },
+    {
+      "id": "s7",
+      "date": "2026-09-01",
+      "procedure": "Adjustment & progress check",
+      "tooth": "Upper & lower arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "s8",
+      "date": "2026-11-10",
+      "procedure": "Braces removal & retainer fitting",
+      "tooth": "Upper & lower arch",
+      "practitioner": "Dr. Amine Ben Youssef",
+      "notes": null,
+      "status": "upcoming"
+    }
+  ]
+}

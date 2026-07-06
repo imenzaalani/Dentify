@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "patientId": "p1",
+    "dentistId": "dr-amine",
+    "careTypeId": "detartrage",
+    "date": "1T09:00:00.000Z",
+    "duration": "45 min",
+    "status": "completed",
+    "prepNotes": "",
+    "internalNotes": "RAS, patient ponctuel",
+    "sendConfirmation": true
+  },
+  {
+    "id": 2,
+    "patientId": "p2",
+    "dentistId": "dr-sarra",
+    "careTypeId": "orthodontie-suivi",
+    "date": "1T14:00:00.000Z",
+    "duration": "30 min",
+    "status": "completed",
+    "prepNotes": "",
+    "internalNotes": "Ajustement des bagues, prochain contrôle dans 6 semaines",
+    "sendConfirmation": true
+  },
+  {
+    "id": 3,
+    "patientId": "p3",
+    "dentistId": "dr-karim",
+    "careTypeId": "extraction",
+    "date": "4T10:00:00.000Z",
+    "duration": "1 hour",
+    "status": "arrived",
+    "prepNotes": "Venir à jeun, prévoir un accompagnant",
+    "internalNotes": "Extraction dent de sagesse inférieure droite",
+    "sendConfirmation": true
+  },
+  {
+    "id": 4,
+    "patientId": "p4",
+    "dentistId": "dr-amine",
+    "careTypeId": "consultation",
+    "date": "4T15:30:00.000Z",
+    "duration": "30 min",
+    "status": "pending",
+    "prepNotes": "",
+    "internalNotes": "Première consultation, douleur molaire",
+    "sendConfirmation": true
+  },
+  {
+    "id": 5,
+    "patientId": "p5",
+    "dentistId": "dr-karim",
+    "careTypeId": "implant",
+    "date": "8T09:00:00.000Z",
+    "duration": "2 hours",
+    "status": "confirmed",
+    "prepNotes": "Venir à jeun",
+    "internalNotes": "Pose implant secteur 2",
+    "sendConfirmation": true
+  },
+  {
+    "id": 6,
+    "patientId": "p6",
+    "dentistId": "dr-sarra",
+    "careTypeId": "orthodontie-pose",
+    "date": "12T11:00:00.000Z",
+    "duration": "1.5 hours",
+    "status": "pending",
+    "prepNotes": "",
+    "internalNotes": "Pose bagues, prévoir kit de nettoyage à remettre au patient",
+    "sendConfirmation": false
+  },
+  {
+    "id": 7,
+    "patientId": "p1",
+    "dentistId": "dr-amine",
+    "careTypeId": "urgence",
+    "date": "15T08:30:00.000Z",
+    "duration": "30 min",
+    "status": "no_show",
+    "prepNotes": "",
+    "internalNotes": "Patient ne s'est pas présenté, 2e absence",
+    "sendConfirmation": true
+  },
+  {
+    "id": 8,
+    "patientId": "p2",
+    "dentistId": "dr-karim",
+    "careTypeId": "blanchiment",
+    "date": "18T16:00:00.000Z",
+    "duration": "1 hour",
+    "status": "confirmed",
+    "prepNotes": "",
+    "internalNotes": "",
+    "sendConfirmation": true
+  },
+  {
+    "id": 9,
+    "patientId": "p3",
+    "dentistId": "dr-amine",
+    "careTypeId": "consultation",
+    "date": "18T09:30:00.000Z",
+    "duration": "30 min",
+    "status": "cancelled",
+    "prepNotes": "",
+    "internalNotes": "",
+    "cancellationReason": "Patient a reporté à la semaine suivante",
+    "sendConfirmation": true
+  },
+  {
+    "id": 10,
+    "patientId": "p4",
+    "dentistId": "dr-sarra",
+    "careTypeId": "orthodontie-suivi",
+    "date": "22T10:00:00.000Z",
+    "duration": "30 min",
+    "status": "pending",
+    "prepNotes": "",
+    "internalNotes": "",
+    "sendConfirmation": true
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "dr-amine",
+    "firstName": "Amine",
+    "lastName": "Ben Salah",
+    "initials": "AB",
+    "specialty": "Omnipratique",
+    "color": "bg-blue-500",
+    "visible": true
+  },
+  {
+    "id": "dr-sarra",
+    "firstName": "Sarra",
+    "lastName": "Trabelsi",
+    "initials": "ST",
+    "specialty": "Orthodontie",
+    "color": "bg-purple-500",
+    "visible": true
+  },
+  {
+    "id": "dr-karim",
+    "firstName": "Karim",
+    "lastName": "Jlassi",
+    "initials": "KJ",
+    "specialty": "Chirurgie orale",
+    "color": "bg-teal-500",
+    "visible": true
+  }
+]

@@ -1,0 +1,381 @@
+[
+  {
+    "id": 1,
+    "number": "FAC-2026-001",
+    "type": "Invoice",
+    "patientId": 1,
+    "patientName": "Amira Bouzid",
+    "patientAvatar": "AB",
+    "treatmentPlanId": 1,
+    "treatmentPlanTitle": "Orthodontic Treatment",
+    "issueDate": "2026-02-10",
+    "dueDate": "2026-03-10",
+    "lineItems": [
+      {
+        "id": "1-1",
+        "description": "Initial bonding (brackets)",
+        "tooth": "Full arch",
+        "quantity": 1,
+        "unitPrice": 900,
+        "discountPct": 0,
+        "lineTotal": 900
+      },
+      {
+        "id": "1-2",
+        "description": "Archwire adjustment",
+        "tooth": "Full arch",
+        "quantity": 1,
+        "unitPrice": 300,
+        "discountPct": 0,
+        "lineTotal": 300
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 1200,
+    "total": 1200,
+    "paidAmount": 1200,
+    "balance": 0,
+    "status": "Paid",
+    "notes": "",
+    "paymentTerms": "Paiement à réception de la facture.",
+    "payments": [
+      {
+        "id": "p1-1",
+        "amount": 1200,
+        "date": "2026-02-15",
+        "method": "Card",
+        "reference": "",
+        "notes": ""
+      }
+    ],
+    "createdAt": "2026-02-10",
+    "reimbursableAmount": 240.0,
+    "patientDueAmount": 960.0
+  },
+  {
+    "id": 2,
+    "number": "FAC-2026-002",
+    "type": "Invoice",
+    "patientId": 2,
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "treatmentPlanId": 2,
+    "treatmentPlanTitle": "Root Canal — Tooth 36",
+    "issueDate": "2026-06-01",
+    "dueDate": "2026-06-15",
+    "lineItems": [
+      {
+        "id": "2-1",
+        "description": "Pulpectomy + canal filling",
+        "tooth": "36",
+        "quantity": 1,
+        "unitPrice": 350,
+        "discountPct": 0,
+        "lineTotal": 350
+      },
+      {
+        "id": "2-2",
+        "description": "Crown placement",
+        "tooth": "36",
+        "quantity": 1,
+        "unitPrice": 100,
+        "discountPct": 0,
+        "lineTotal": 100
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 450,
+    "total": 450,
+    "paidAmount": 450,
+    "balance": 0,
+    "status": "Paid",
+    "notes": "",
+    "paymentTerms": "Paiement à réception de la facture.",
+    "payments": [
+      {
+        "id": "p2-1",
+        "amount": 450,
+        "date": "2026-06-10",
+        "method": "Cash",
+        "reference": "",
+        "notes": ""
+      }
+    ],
+    "createdAt": "2026-06-01",
+    "reimbursableAmount": 90.0,
+    "patientDueAmount": 360.0
+  },
+  {
+    "id": 3,
+    "number": "DEV-2026-001",
+    "type": "Quote",
+    "patientId": 3,
+    "patientName": "Sarra Mejri",
+    "patientAvatar": "SM",
+    "treatmentPlanId": 3,
+    "treatmentPlanTitle": "Scaling & Whitening Program",
+    "issueDate": "2026-06-25",
+    "dueDate": null,
+    "lineItems": [
+      {
+        "id": "3-1",
+        "description": "Deep scaling",
+        "tooth": "Full arch",
+        "quantity": 1,
+        "unitPrice": 120,
+        "discountPct": 0,
+        "lineTotal": 120
+      },
+      {
+        "id": "3-2",
+        "description": "Whitening session",
+        "tooth": "Anterior",
+        "quantity": 1,
+        "unitPrice": 160,
+        "discountPct": 0,
+        "lineTotal": 160
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 280,
+    "total": 280,
+    "paidAmount": 0,
+    "balance": 280,
+    "status": "Sent",
+    "notes": "Devis valable 30 jours.",
+    "paymentTerms": "",
+    "payments": [],
+    "createdAt": "2026-06-25",
+    "reimbursableAmount": 56.0,
+    "patientDueAmount": 224.0
+  },
+  {
+    "id": 4,
+    "number": "FAC-2026-003",
+    "type": "Invoice",
+    "patientId": 4,
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "treatmentPlanId": 4,
+    "treatmentPlanTitle": "Implant — Tooth 46",
+    "issueDate": "2026-03-01",
+    "dueDate": "2026-03-31",
+    "lineItems": [
+      {
+        "id": "4-1",
+        "description": "Implant placement",
+        "tooth": "46",
+        "quantity": 1,
+        "unitPrice": 1800,
+        "discountPct": 5,
+        "lineTotal": 1710
+      },
+      {
+        "id": "4-2",
+        "description": "Abutment + crown fitting",
+        "tooth": "46",
+        "quantity": 1,
+        "unitPrice": 832,
+        "discountPct": 5,
+        "lineTotal": 790
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 2500,
+    "total": 2500,
+    "paidAmount": 1000,
+    "balance": 1500,
+    "status": "Partially Paid",
+    "notes": "",
+    "paymentTerms": "Paiement en 2 fois.",
+    "payments": [
+      {
+        "id": "p4-1",
+        "amount": 1000,
+        "date": "2026-06-05",
+        "method": "Transfer",
+        "reference": "VIR-44218",
+        "notes": "Premier versement"
+      }
+    ],
+    "createdAt": "2026-03-01",
+    "reimbursableAmount": 500.0,
+    "patientDueAmount": 2000.0
+  },
+  {
+    "id": 5,
+    "number": "FAC-2026-004",
+    "type": "Invoice",
+    "patientId": 6,
+    "patientName": "Bilel Jaziri",
+    "patientAvatar": "BJ",
+    "treatmentPlanId": null,
+    "treatmentPlanTitle": "",
+    "issueDate": "2025-11-05",
+    "dueDate": "2025-11-20",
+    "lineItems": [
+      {
+        "id": "5-1",
+        "description": "Consultation + panoramic X-ray",
+        "tooth": "38, 48",
+        "quantity": 1,
+        "unitPrice": 150,
+        "discountPct": 0,
+        "lineTotal": 150
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 150,
+    "total": 150,
+    "paidAmount": 0,
+    "balance": 150,
+    "status": "Overdue",
+    "notes": "Patient ne s'est pas représenté.",
+    "paymentTerms": "Paiement à réception de la facture.",
+    "payments": [],
+    "createdAt": "2025-11-05",
+    "reimbursableAmount": 30.0,
+    "patientDueAmount": 120.0
+  },
+  {
+    "id": 6,
+    "number": "DEV-2026-002",
+    "type": "Quote",
+    "patientId": 7,
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "treatmentPlanId": 6,
+    "treatmentPlanTitle": "Full Mouth Composite Restoration",
+    "issueDate": "2026-06-10",
+    "dueDate": null,
+    "lineItems": [
+      {
+        "id": "6-1",
+        "description": "Composite filling",
+        "tooth": "14, 15",
+        "quantity": 2,
+        "unitPrice": 110,
+        "discountPct": 0,
+        "lineTotal": 220
+      },
+      {
+        "id": "6-2",
+        "description": "Composite filling",
+        "tooth": "26, 27",
+        "quantity": 2,
+        "unitPrice": 110,
+        "discountPct": 0,
+        "lineTotal": 220
+      },
+      {
+        "id": "6-3",
+        "description": "Composite filling",
+        "tooth": "36",
+        "quantity": 1,
+        "unitPrice": 110,
+        "discountPct": 0,
+        "lineTotal": 110
+      },
+      {
+        "id": "6-4",
+        "description": "Final polish & bite check",
+        "tooth": "Full arch",
+        "quantity": 1,
+        "unitPrice": 430,
+        "discountPct": 0,
+        "lineTotal": 430
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 980,
+    "total": 980,
+    "paidAmount": 0,
+    "balance": 980,
+    "status": "Draft",
+    "notes": "",
+    "paymentTerms": "",
+    "payments": [],
+    "createdAt": "2026-06-10",
+    "reimbursableAmount": 196.0,
+    "patientDueAmount": 784.0
+  },
+  {
+    "id": 7,
+    "number": "FAC-2026-005",
+    "type": "Invoice",
+    "patientId": 7,
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "treatmentPlanId": null,
+    "treatmentPlanTitle": "",
+    "issueDate": "2026-06-15",
+    "dueDate": "2026-07-15",
+    "lineItems": [
+      {
+        "id": "7-1",
+        "description": "Composite filling — deposit",
+        "tooth": "14, 15",
+        "quantity": 1,
+        "unitPrice": 320,
+        "discountPct": 0,
+        "lineTotal": 320
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 320,
+    "total": 320,
+    "paidAmount": 0,
+    "balance": 320,
+    "status": "Sent",
+    "notes": "",
+    "paymentTerms": "Paiement à réception de la facture.",
+    "payments": [],
+    "createdAt": "2026-06-15",
+    "reimbursableAmount": 64.0,
+    "patientDueAmount": 256.0
+  },
+  {
+    "id": 8,
+    "number": "FAC-2026-006",
+    "type": "Invoice",
+    "patientId": 8,
+    "patientName": "Mehdi Slim",
+    "patientAvatar": "MS",
+    "treatmentPlanId": null,
+    "treatmentPlanTitle": "",
+    "issueDate": "2026-05-01",
+    "dueDate": "2026-05-15",
+    "lineItems": [
+      {
+        "id": "8-1",
+        "description": "Routine check-up + cleaning",
+        "tooth": "Full arch",
+        "quantity": 1,
+        "unitPrice": 600,
+        "discountPct": 0,
+        "lineTotal": 600
+      }
+    ],
+    "globalDiscountPct": 0,
+    "subtotal": 600,
+    "total": 600,
+    "paidAmount": 600,
+    "balance": 0,
+    "status": "Paid",
+    "notes": "",
+    "paymentTerms": "Paiement à réception de la facture.",
+    "payments": [
+      {
+        "id": "p8-1",
+        "amount": 600,
+        "date": "2026-05-03",
+        "method": "Check",
+        "reference": "CHQ-00231",
+        "notes": ""
+      }
+    ],
+    "createdAt": "2026-05-01",
+    "reimbursableAmount": 120.0,
+    "patientDueAmount": 480.0
+  }
+]

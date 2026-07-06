@@ -1,0 +1,253 @@
+[
+  {
+    "id": 1,
+    "patientId": 1,
+    "patientName": "Amira Bouzid",
+    "patientAvatar": "AB",
+    "title": "Orthodontic Treatment",
+    "diagnosis": "Class II malocclusion, moderate crowding",
+    "startDate": "2026-02-10",
+    "endDate": "2026-12-15",
+    "status": "In Progress",
+    "notes": "Patient tolerating brackets well. Review elastics compliance next visit.",
+    "steps": [
+      {
+        "id": "1-1",
+        "label": "Initial bonding (brackets)",
+        "tooth": "Full arch",
+        "estDuration": 90,
+        "status": "completed"
+      },
+      {
+        "id": "1-2",
+        "label": "Archwire adjustment",
+        "tooth": "Full arch",
+        "estDuration": 30,
+        "status": "completed"
+      },
+      {
+        "id": "1-3",
+        "label": "Elastics fitting",
+        "tooth": "13, 23",
+        "estDuration": 20,
+        "status": "completed"
+      },
+      {
+        "id": "1-4",
+        "label": "Progress check + rewire",
+        "tooth": "Full arch",
+        "estDuration": 30,
+        "status": "pending"
+      },
+      {
+        "id": "1-5",
+        "label": "Debonding",
+        "tooth": "Full arch",
+        "estDuration": 60,
+        "status": "pending"
+      },
+      {
+        "id": "1-6",
+        "label": "Retainer fitting",
+        "tooth": "Full arch",
+        "estDuration": 30,
+        "status": "pending"
+      }
+    ],
+    "createdAt": "2026-02-05"
+  },
+  {
+    "id": 2,
+    "patientId": 2,
+    "patientName": "Karim Trabelsi",
+    "patientAvatar": "KT",
+    "title": "Root Canal — Tooth 36",
+    "diagnosis": "Irreversible pulpitis",
+    "startDate": "2026-06-01",
+    "endDate": "2026-06-22",
+    "status": "Completed",
+    "notes": "No complications. Crown placement completed final session.",
+    "steps": [
+      {
+        "id": "2-1",
+        "label": "Pulpectomy",
+        "tooth": "36",
+        "estDuration": 60,
+        "status": "completed"
+      },
+      {
+        "id": "2-2",
+        "label": "Canal shaping & filling",
+        "tooth": "36",
+        "estDuration": 50,
+        "status": "completed"
+      },
+      {
+        "id": "2-3",
+        "label": "Crown placement",
+        "tooth": "36",
+        "estDuration": 45,
+        "status": "completed",
+        "dependsOnStepId": "2-2"
+      }
+    ],
+    "createdAt": "2026-05-28"
+  },
+  {
+    "id": 3,
+    "patientId": 3,
+    "patientName": "Sarra Mejri",
+    "patientAvatar": "SM",
+    "title": "Scaling & Whitening Program",
+    "diagnosis": "Mild gingivitis, surface staining",
+    "startDate": "2026-07-10",
+    "endDate": null,
+    "status": "Planned",
+    "notes": "",
+    "steps": [
+      {
+        "id": "3-1",
+        "label": "Deep scaling",
+        "tooth": "Full arch",
+        "estDuration": 45,
+        "status": "pending"
+      },
+      {
+        "id": "3-2",
+        "label": "Polishing",
+        "tooth": "Full arch",
+        "estDuration": 20,
+        "status": "pending"
+      },
+      {
+        "id": "3-3",
+        "label": "Whitening session",
+        "tooth": "Anterior",
+        "estDuration": 60,
+        "status": "pending"
+      }
+    ],
+    "createdAt": "2026-06-25"
+  },
+  {
+    "id": 4,
+    "patientId": 4,
+    "patientName": "Walid Hamdi",
+    "patientAvatar": "WH",
+    "title": "Implant — Tooth 46",
+    "diagnosis": "Missing molar, adequate bone density",
+    "startDate": "2026-03-01",
+    "endDate": "2026-09-01",
+    "status": "In Progress",
+    "notes": "Osseointegration period ongoing. Next visit: abutment placement.",
+    "steps": [
+      {
+        "id": "4-1",
+        "label": "Implant placement",
+        "tooth": "46",
+        "estDuration": 90,
+        "status": "completed",
+        "requiresConsent": true,
+        "consentSignedAt": "2026-01-20"
+      },
+      {
+        "id": "4-2",
+        "label": "Healing period check",
+        "tooth": "46",
+        "estDuration": 15,
+        "status": "completed"
+      },
+      {
+        "id": "4-3",
+        "label": "Abutment placement",
+        "tooth": "46",
+        "estDuration": 45,
+        "status": "pending",
+        "dependsOnStepId": "4-2"
+      },
+      {
+        "id": "4-4",
+        "label": "Crown fitting",
+        "tooth": "46",
+        "estDuration": 45,
+        "status": "pending",
+        "dependsOnStepId": "4-3"
+      }
+    ],
+    "createdAt": "2026-02-20"
+  },
+  {
+    "id": 5,
+    "patientId": 6,
+    "patientName": "Bilel Jaziri",
+    "patientAvatar": "BJ",
+    "title": "Wisdom Tooth Extraction",
+    "diagnosis": "Impacted lower third molars",
+    "startDate": "2025-11-05",
+    "endDate": "2025-11-20",
+    "status": "Abandoned",
+    "notes": "Patient did not return after consultation. Follow up by phone.",
+    "steps": [
+      {
+        "id": "5-1",
+        "label": "Consultation + panoramic X-ray",
+        "tooth": "38, 48",
+        "estDuration": 30,
+        "status": "completed"
+      },
+      {
+        "id": "5-2",
+        "label": "Surgical extraction",
+        "tooth": "38, 48",
+        "estDuration": 60,
+        "status": "pending",
+        "dependsOnStepId": "5-1",
+        "requiresConsent": true
+      }
+    ],
+    "createdAt": "2025-11-01"
+  },
+  {
+    "id": 6,
+    "patientId": 7,
+    "patientName": "Nadia Gharbi",
+    "patientAvatar": "NG",
+    "title": "Full Mouth Composite Restoration",
+    "diagnosis": "Multiple carious lesions",
+    "startDate": "2026-06-15",
+    "endDate": "2026-08-01",
+    "status": "In Progress",
+    "notes": "",
+    "steps": [
+      {
+        "id": "6-1",
+        "label": "Composite filling",
+        "tooth": "14, 15",
+        "estDuration": 40,
+        "status": "completed"
+      },
+      {
+        "id": "6-2",
+        "label": "Composite filling",
+        "tooth": "26, 27",
+        "estDuration": 40,
+        "status": "pending"
+      },
+      {
+        "id": "6-3",
+        "label": "Composite filling",
+        "tooth": "36",
+        "estDuration": 30,
+        "status": "pending"
+      },
+      {
+        "id": "6-4",
+        "label": "Final polish & bite check",
+        "tooth": "Full arch",
+        "estDuration": 20,
+        "status": "pending"
+      }
+    ],
+    "createdAt": "2026-06-10"
+  }
+]

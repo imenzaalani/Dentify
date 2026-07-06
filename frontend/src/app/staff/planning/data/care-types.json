@@ -1,0 +1,10 @@
+[
+  { "id": "consultation", "name": "Consultation", "category": "soins_courants", "defaultDuration": "30 min", "color": "bg-blue-500", "active": true, "price": 60, "reimbursableAmount": 20 },
+  { "id": "detartrage", "name": "Détartrage", "category": "soins_courants", "defaultDuration": "45 min", "color": "bg-blue-500", "active": true, "price": 90, "reimbursableAmount": 30 },
+  { "id": "extraction", "name": "Extraction", "category": "chirurgie", "defaultDuration": "1 hour", "color": "bg-red-500", "active": true, "price": 150, "reimbursableAmount": 50 },
+  { "id": "implant", "name": "Pose d'implant", "category": "chirurgie", "defaultDuration": "2 hours", "color": "bg-red-500", "active": true, "price": 1200, "reimbursableAmount": 100 },
+  { "id": "orthodontie-pose", "name": "Pose de bagues", "category": "orthodontie", "defaultDuration": "1.5 hours", "color": "bg-purple-500", "active": true, "price": 900, "reimbursableAmount": 0 },
+  { "id": "orthodontie-suivi", "name": "Suivi orthodontique", "category": "orthodontie", "defaultDuration": "30 min", "color": "bg-purple-500", "active": true, "price": 80, "reimbursableAmount": 0 },
+  { "id": "blanchiment", "name": "Blanchiment dentaire", "category": "esthetique", "defaultDuration": "1 hour", "color": "bg-pink-500", "active": true, "price": 350, "reimbursableAmount": 0 },
+  { "id": "urgence", "name": "Urgence dentaire", "category": "urgence", "defaultDuration": "30 min", "color": "bg-orange-500", "active": true, "price": 70, "reimbursableAmount": 20 }
+]

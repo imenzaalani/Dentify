@@ -1,0 +1,33 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarConfigProvider } from "@/contexts/sidebar-context";
+import { inter } from "@/lib/fonts";
+
+export const metadata: Metadata = {
+  title: "Dentify",
+  description: "Dentify dental practice management platform",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider defaultTheme="light" storageKey="nextjs-ui-theme">
+          <SidebarConfigProvider>
+            {children}
+          </SidebarConfigProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
