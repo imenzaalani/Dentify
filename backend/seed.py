@@ -1,8 +1,7 @@
 """
-Bootstraps the first owner (super-admin) account so someone can log in
-before any other accounts exist.
+Bootstraps the first owner account so someone can log in before any other
+accounts exist. Run from the backend/ directory with the venv active:
 
-Usage (from the backend/ directory, with the venv or container active):
     python seed.py
 """
 import asyncio
@@ -12,8 +11,7 @@ from sqlalchemy import select
 from app.core.config import settings
 from app.core.database import AsyncSessionLocal
 from app.core.security import hash_password
-from app.models.user import User, UserRole
-from app.models.staff import StaffProfile
+from backend.app.models.patient import User, UserRole
 
 
 async def seed_owner() -> None:
@@ -32,15 +30,6 @@ async def seed_owner() -> None:
             is_verified=True,
         )
         db.add(owner)
-        await db.flush()  # get owner.id before creating the profile
-
-        db.add(
-            StaffProfile(
-                user_id=owner.id,
-                first_name="Owner",
-                last_name="Account",
-            )
-        )
         await db.commit()
 
         print(f"Created owner account: {settings.SEED_OWNER_EMAIL}")

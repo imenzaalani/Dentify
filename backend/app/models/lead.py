@@ -1,46 +1,61 @@
 import enum
+import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Enum, ForeignKey, String, Text
+from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
 from app.models.base import TimestampMixin, UUIDPKMixin
 
 
 class LeadStatus(str, enum.Enum):
-    NEW = "new"
-    CONTACTED = "contacted"
-    CONVERTED = "converted"    # became a Patient
-    REJECTED = "rejected"      # sans suite
+    PENDING = "pending"
+    CONVERTED = "converted"
+    REJECTED = "rejected"
+    NO_RESPONSE = "no_response"
+
+
+class BookingFor(str, enum.Enum):
+    MYSELF = "myself"
+    DEPENDENT = "dependent"
+    SOMEONE_ELSE = "someone_else"
+
+
+class HearAboutUs(str, enum.Enum):
+    GOOGLE = "google"
+    INSTAGRAM_FACEBOOK = "instagram_facebook"
+    YELP = "yelp"
+    FAMILY_FRIEND = "family_friend"
+    WALK_BY = "walk_by"
+    OTHER = "other"
 
 
 class Lead(UUIDPKMixin, TimestampMixin, Base):
-    """An unqualified online appointment request — distinct from Patient
-    until a receptionist confirms the first visit (architecture v2, section 3)."""
     __tablename__ = "leads"
 
-    first_name: Mapped[str] = mapped_column(String(100), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(100), nullable=False)
-    phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    email: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    requested_reason: Mapped[str | None] = mapped_column(Text, nullable=True)
-    requested_datetime: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    preferred_dentist_id: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("dentists.id"), nullable=True
-    )
+    requested_service: Mapped[str] = mapped_column(String(255), nullable=False)
+    requested_datetime: Mapped[str] = mapped_column(String(50), nullable=False)
 
-    status: Mapped[LeadStatus] = mapped_column(
-        Enum(LeadStatus, name="lead_status"), default=LeadStatus.NEW, nullable=False
-    )
-    rejection_reason: Mapped[str | None] = mapped_column(Text, nullable=True)
-    converted_patient_id: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("patients.id"), nullable=True
-    )
-    qualified_by: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=True
-    )
+    booking_for: Mapped[str] = mapped_column(String(20), nullable=False)
 
-    preferred_dentist: Mapped["Dentist | None"] = relationship()
-    converted_patient: Mapped["Patient | None"] = relationship()
+    patient_first_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    patient_last_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    patient_legal_sex: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    patient_dob: Mapped[str] = mapped_column(String(50), nullable=False)
+    patient_zip: Mapped[str | None] = mapped_column(String(30), nullable=True)
+
+    contact_email: Mapped[str] = mapped_column(String(255), nullable=False)
+    contact_phone: Mapped[str] = mapped_column(String(50), nullable=False)
+    sms_consent: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+    comments: Mapped[str | None] = mapped_column(String(2000), nullable=True)
+    hear_about_us: Mapped[str | None] = mapped_column(String(50), nullable=True)
+
+    source: Mapped[str] = mapped_column(String(50), nullable=False, server_default="online_form")
+    status: Mapped[str] = mapped_column(String(30), nullable=False, server_default="pending")
+    notes: Mapped[str | None] = mapped_column(String(2000), nullable=True)
+    converted_to_patient_id: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("patients.id", ondelete="SET NULL"), nullable=True
+    )

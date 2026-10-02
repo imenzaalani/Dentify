@@ -1,7 +1,8 @@
 import enum
-from datetime import date
+import uuid
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, Enum, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -9,7 +10,7 @@ from app.core.database import Base
 from app.models.base import TimestampMixin, UUIDPKMixin
 
 
-class TreatmentStatus(str, enum.Enum):
+class TreatmentPlanStatus(str, enum.Enum):
     PLANNED = "planned"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
@@ -18,74 +19,74 @@ class TreatmentStatus(str, enum.Enum):
 
 class TreatmentStepStatus(str, enum.Enum):
     PENDING = "pending"
-    SCHEDULED = "scheduled"
     COMPLETED = "completed"
-    SKIPPED = "skipped"
 
 
-class Treatment(UUIDPKMixin, TimestampMixin, Base):
-    """A multi-phase treatment plan — dentapp-architecture-v2.md section 5."""
-    __tablename__ = "treatments"
+class TreatmentPlan(UUIDPKMixin, TimestampMixin, Base):
+    """A course of care for one patient, made up of ordered TreatmentSteps.
 
-    patient_id: Mapped[PG_UUID] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("patients.id"), nullable=False
+    Referenced (not yet, per app/models/appointment.py's docstring) by a
+    future Appointment.treatment_step_id once that migration lands.
+    """
+
+    __tablename__ = "treatment_plans"
+
+    patient_id: Mapped[uuid.UUID] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("patients.id", ondelete="CASCADE"), nullable=False
     )
-    dentist_id: Mapped[PG_UUID] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("dentists.id"), nullable=False
-    )
 
-    title: Mapped[str] = mapped_column(String(200), nullable=False)
-    diagnosis: Mapped[str | None] = mapped_column(Text, nullable=True)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    diagnosis: Mapped[str | None] = mapped_column(String(2000), nullable=True)
 
     start_date: Mapped[date] = mapped_column(Date, nullable=False)
-    expected_end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-    actual_end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    end_date: Mapped[date | None] = mapped_column(Date, nullable=True)
 
-    status: Mapped[TreatmentStatus] = mapped_column(
-        Enum(TreatmentStatus, name="treatment_status"), default=TreatmentStatus.PLANNED, nullable=False
-    )
-    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="planned")
+    notes: Mapped[str | None] = mapped_column(String(2000), nullable=True)
 
-    patient: Mapped["Patient"] = relationship(back_populates="treatments")
-    dentist: Mapped["Dentist"] = relationship(back_populates="treatments")
-    steps: Mapped[list["TreatmentStep"]] = relationship(
-        back_populates="treatment", order_by="TreatmentStep.step_number", cascade="all, delete-orphan"
+    created_by: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
-    invoices: Mapped[list["Invoice"]] = relationship(back_populates="treatment")
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
+
+    steps = relationship(
+        "TreatmentStep",
+        back_populates="plan",
+        cascade="all, delete-orphan",
+        order_by="TreatmentStep.position",
+    )
 
 
 class TreatmentStep(UUIDPKMixin, TimestampMixin, Base):
-    """A single act within a treatment plan.
-
-    `depends_on_step_id` implements the dependency rule from
-    dentapp-architecture-v2.md section 5 (e.g. a root canal must be
-    completed before a crown can be scheduled).
+    """One procedure within a TreatmentPlan. Ordered via `position` rather
+    than relying on insertion order, since steps can be reordered in the
+    plan editor (mirrors the frontend's useFieldArray `move`).
     """
+
     __tablename__ = "treatment_steps"
 
-    treatment_id: Mapped[PG_UUID] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("treatments.id"), nullable=False
-    )
-    depends_on_step_id: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("treatment_steps.id"), nullable=True
+    treatment_plan_id: Mapped[uuid.UUID] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("treatment_plans.id", ondelete="CASCADE"), nullable=False
     )
 
-    step_number: Mapped[int] = mapped_column(Integer, nullable=False)
-    act_name: Mapped[str] = mapped_column(String(200), nullable=False)
-    act_code: Mapped[str | None] = mapped_column(String(50), nullable=True)  # future CNAM nomenclature
-    tooth_number: Mapped[str | None] = mapped_column(String(10), nullable=True)  # ISO notation
+    label: Mapped[str] = mapped_column(String(255), nullable=False)
+    tooth: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    est_duration_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="pending")
+    position: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
 
-    planned_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-    completed_date: Mapped[date | None] = mapped_column(Date, nullable=True)
-
-    status: Mapped[TreatmentStepStatus] = mapped_column(
-        Enum(TreatmentStepStatus, name="treatment_step_status"),
-        default=TreatmentStepStatus.PENDING,
-        nullable=False,
+    # A step can require the prior completion of another step in the same
+    # plan (e.g. crown placement depends on canal filling). SET NULL, not
+    # CASCADE — deleting the dependency shouldn't take this step down too.
+    depends_on_step_id: Mapped[uuid.UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True), ForeignKey("treatment_steps.id", ondelete="SET NULL"), nullable=True
     )
-    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
-    visible_to_patient: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
-    treatment: Mapped["Treatment"] = relationship(back_populates="steps", foreign_keys=[treatment_id])
-    depends_on: Mapped["TreatmentStep | None"] = relationship(remote_side="TreatmentStep.id")
-    appointments: Mapped[list["Appointment"]] = relationship(back_populates="treatment_step")
+    # Invasive acts (extraction, surgery, prosthesis...) require a signed
+    # consent doc before the step can be marked completed.
+    requires_consent: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="false")
+    consent_signed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    plan = relationship("TreatmentPlan", back_populates="steps")

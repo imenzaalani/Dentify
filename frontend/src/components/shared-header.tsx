@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { CommandSearch, SearchTrigger, type SearchItem } from "@/components/command-search"
 import { ModeToggle } from "@/components/mode-toggle"
+import { LanguageSwitcher } from "@/components/language-switcher"
 import {
   Popover,
   PopoverContent,
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/popover"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
+import { useTranslation } from "@/hooks/use-translation"
 
 export interface HeaderNotification {
   id: string
@@ -43,12 +45,12 @@ const ICONS: Record<HeaderNotification["type"], typeof Bell> = {
   document: FileText,
 }
 
-function relativeTime(iso: string) {
+function relativeTime(iso: string, t: ReturnType<typeof useTranslation>["t"]) {
   const diffMs = Date.now() - new Date(iso).getTime()
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-  if (diffDays <= 0) return "Today"
-  if (diffDays === 1) return "Yesterday"
-  return `${diffDays} days ago`
+  if (diffDays <= 0) return t("today")
+  if (diffDays === 1) return t("yesterday")
+  return t("daysAgo", { count: diffDays })
 }
 
 export function SharedHeader({
@@ -56,13 +58,18 @@ export function SharedHeader({
   showSearch = true,
   showNotifications = true,
   showModeToggle = true,
-  searchPlaceholder = "Search",
+  searchPlaceholder,
   notificationButtonVariant = "outline",
   notificationButtonClassName = "h-9 w-9 border-border/70 bg-background/80",
-  notificationTitle = "Notifications",
+  notificationTitle,
   notifications: notificationsProp,
   searchItems,
 }: SharedHeaderProps) {
+  const { t } = useTranslation("notifications")
+  const { t: tc } = useTranslation("common")
+  const resolvedSearchPlaceholder = searchPlaceholder ?? tc("search")
+  const resolvedNotificationTitle = notificationTitle ?? t("title")
+
   const defaultNotifications: HeaderNotification[] = [
     {
       id: "n1",
@@ -127,7 +134,7 @@ export function SharedHeader({
     <>
       <header
         className={cn(
-          "flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)",
+          "flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height) print:hidden",
           className
         )}
       >
@@ -142,7 +149,7 @@ export function SharedHeader({
               <div className="flex-1 max-w-sm">
                 <SearchTrigger
                   onClick={() => setSearchOpen(true)}
-                  placeholder={searchPlaceholder}
+                  placeholder={resolvedSearchPlaceholder}
                 />
               </div>
             </>
@@ -171,7 +178,7 @@ export function SharedHeader({
                 <PopoverContent className="w-80 p-0" align="end">
                   <div className="border-b p-4">
                     <div className="flex items-center justify-between">
-                      <h2 className="font-semibold">{notificationTitle}</h2>
+                      <h2 className="font-semibold">{resolvedNotificationTitle}</h2>
                       {unreadCount > 0 && (
                         <Button
                           variant="ghost"
@@ -179,7 +186,7 @@ export function SharedHeader({
                           className="h-auto p-0 text-xs"
                           onClick={handleMarkAllAsRead}
                         >
-                          Mark all as read
+                          {t("markAllRead")}
                         </Button>
                       )}
                     </div>
@@ -187,7 +194,7 @@ export function SharedHeader({
                   <ScrollArea className="h-[400px]">
                     {notifications.length === 0 ? (
                       <div className="flex h-[400px] items-center justify-center text-sm text-muted-foreground">
-                        No notifications
+                        {t("empty")}
                       </div>
                     ) : (
                       <div className="divide-y">
@@ -217,7 +224,7 @@ export function SharedHeader({
                                     {notification.message}
                                   </p>
                                   <p className="mt-1 text-xs text-muted-foreground/70">
-                                    {relativeTime(notification.date)}
+                                    {relativeTime(notification.date, t)}
                                   </p>
                                 </div>
                               </div>
@@ -230,7 +237,12 @@ export function SharedHeader({
                 </PopoverContent>
               </Popover>
             )}
-            {showModeToggle && <ModeToggle />}
+            {showModeToggle && (
+              <>
+                <LanguageSwitcher variant={notificationButtonVariant} />
+                <ModeToggle />
+              </>
+            )}
           </div>
         </div>
       </header>

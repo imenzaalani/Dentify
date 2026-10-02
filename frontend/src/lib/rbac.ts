@@ -1,54 +1,48 @@
-// Central place for staff role types and the (currently mocked) auth/role
-// lookup. Once a real backend exists, `useCurrentRole` and `useAuthGuard`
-// are the only two things that need to change — everything else (sidebar,
-// layouts, page-level conditional rendering) consumes them.
-//
-// TODO: replace the mocked bits below with a real session/auth call
-// (e.g. a React context populated from `/me`, or a server session lookup).
+// Central place for staff role types and the auth/role lookup.
+// `useCurrentRole` and `useAuthGuard` are the only two things that changed
+// when real auth was wired up — everything else (sidebar, layouts,
+// page-level conditional rendering) consumes them and needed no changes.
+
+import { useAuth } from "@/lib/auth"
 
 export type StaffRole = "receptionist" | "dentist" | "owner"
 
-// TODO: replace with real session/auth role once auth is wired up.
-// Toggle this manually for now to preview the different role states across
-// the app (sidebar, patient dossier, route guards all read from here).
-export const CURRENT_ROLE: StaffRole = "dentist"
-
 /**
- * Returns the current staff member's role.
- * TODO: source from session/auth context instead of the hardcoded constant.
+ * Returns the current staff member's role, sourced from the real session.
+ * Returns null if there's no signed-in user yet (loading or logged out) —
+ * callers that need a role to render should check `useAuthGuard` instead,
+ * which handles that state explicitly.
  */
-export function useCurrentRole(): StaffRole {
-  return CURRENT_ROLE
+export function useCurrentRole(): StaffRole | null {
+  const { user } = useAuth()
+  if (!user) return null
+  return user.role as StaffRole
 }
 
 export interface AuthGuardResult {
   isLoading: boolean
   isAuthenticated: boolean
   isAuthorized: boolean
-  role: StaffRole
+  role: StaffRole | null
 }
 
 /**
  * Single point of integration for route protection.
  *
- * - `isAuthenticated` always resolves to `true` for now (no backend to check
- *   a session against yet) — flip this once auth exists, nothing that calls
- *   this hook needs to change.
+ * - `isAuthenticated` reflects whether a real session exists.
  * - `isAuthorized` is `true` when no `roles` filter is given, or when the
- *   current role is included in it.
+ *   current role is included in it. Always `false` if not authenticated.
  *
  * Usage:
  *   const { isAuthenticated, isAuthorized, isLoading } = useAuthGuard({ roles: ["owner"] })
  */
 export function useAuthGuard(options?: { roles?: StaffRole[] }): AuthGuardResult {
-  const role = useCurrentRole()
+  const { user, loading } = useAuth()
+  const role = user ? (user.role as StaffRole) : null
 
-  // TODO: replace with a real session check (loading state while the
-  // session request is in flight, false when there's no valid session).
-  const isLoading = false
-  const isAuthenticated = true
-
-  const isAuthorized = !options?.roles || options.roles.includes(role)
+  const isLoading = loading
+  const isAuthenticated = !!user
+  const isAuthorized = isAuthenticated && (!options?.roles || options.roles.includes(role as StaffRole))
 
   return { isLoading, isAuthenticated, isAuthorized, role }
 }

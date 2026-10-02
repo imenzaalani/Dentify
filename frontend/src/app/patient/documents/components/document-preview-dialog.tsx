@@ -37,7 +37,9 @@ export function DocumentPreviewDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>{document.title}</DialogTitle>
+          <DialogTitle className="max-w-full min-w-0 overflow-hidden whitespace-nowrap truncate">
+            {document.title}
+          </DialogTitle>
           <DialogDescription>
             {new Date(document.date).toLocaleDateString("en-US", {
               day: "numeric",

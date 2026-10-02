@@ -1,14 +1,24 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from app.api.v1 import api_router
 from app.core.config import settings
+from app.core.rate_limit import limiter
 
 # Import the models package so every model is registered on Base.metadata
 # and all string-based relationship() references resolve correctly.
 import app.models  # noqa: F401
+
+# Make sure the local avatars folder exists before we mount it — StaticFiles
+# raises on startup if the directory is missing.
+AVATARS_PATH = Path(settings.AVATARS_DIR)
+AVATARS_PATH.mkdir(parents=True, exist_ok=True)
 
 
 @asynccontextmanager
@@ -29,6 +39,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -38,6 +51,10 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+
+# Serves files saved by the avatar upload endpoint, e.g.
+# GET /avatars/<filename> -> app/../avatars/<filename> on disk.
+app.mount(settings.AVATARS_URL_PREFIX, StaticFiles(directory=AVATARS_PATH), name="avatars")
 
 
 @app.get("/", tags=["health"])

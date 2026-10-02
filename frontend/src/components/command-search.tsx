@@ -9,7 +9,6 @@ import {
   MessageCircle,
   Calendar,
   Users,
-  Stethoscope,
   ClipboardList,
   Receipt,
   FileText,
@@ -137,7 +136,7 @@ export function CommandSearch({ open, onOpenChange, searchItems }: CommandSearch
     // Clinical
     { title: "Planning", url: "/staff/planning", group: "Clinical", icon: Calendar },
     { title: "Patients", url: "/staff/patients", group: "Clinical", icon: Users },
-    { title: "Doctors", url: "/staff/doctors", group: "Clinical", icon: Stethoscope },
+    { title: "Staff Management", url: "/staff/team", group: "Clinical", icon: Users },
     { title: "Treatments", url: "/staff/treatments", group: "Clinical", icon: ClipboardList },
     { title: "Documents", url: "/staff/documents", group: "Clinical", icon: FileText },
     { title: "Chat", url: "/staff/chat", group: "Clinical", icon: MessageCircle },

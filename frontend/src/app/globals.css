@@ -24,6 +24,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -54,6 +56,8 @@
   --muted-foreground: oklch(0.40 0.04 265);
   --accent: oklch(0.93 0.018 252);
   --accent-foreground: var(--foreground);
+  --destructive: oklch(0.58 0.24 27);
+  --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.88 0.018 252);
   --input: oklch(0.82 0.02 252);
   --ring: oklch(0.48 0.22 240);
@@ -77,6 +81,8 @@
   --muted-foreground: oklch(0.65 0.03 220);
   --accent: oklch(0.7 0.28 210);
   --accent-foreground: var(--foreground);
+  --destructive: oklch(0.65 0.26 27);
+  --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.20 0.025 220);
   --input: oklch(0.26 0.03 220);
   --ring: oklch(0.62 0.28 215);
@@ -328,4 +334,84 @@
     linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+}
+
+/* -----------------------------------------------------------------------
+ * Planning print stylesheet
+ * -----------------------------------------------------------------------
+ * The day/week grid is a viewport-height, sticky-header scroll area — great
+ * on screen, but "overflow: auto" + a fixed height is exactly what gets a
+ * print engine to clip content to whatever was scrolled into view instead
+ * of paginating the full day. This section un-does the screen-only layout
+ * tricks for `window.print()`:
+ *  - app chrome (nav sidebar, top header, footer) is hidden — see the
+ *    print:hidden classes on AppSidebar/SharedHeader/SiteFooter, kept out
+ *    of this file since Tailwind utilities already cover those elements.
+ *  - the day/week scroll containers switch from overflow-auto/fixed-height
+ *    to normal flow so every appointment prints, not just the visible slice.
+ *  - sticky positioning (time gutter, column headers) becomes static, since
+ *    a "sticky" element has nothing to stick to once overflow is disabled,
+ *    and left as sticky it can duplicate or mis-place itself across pages.
+ *  - practitioner/day columns get a print-only landscape page + a narrower
+ *    minimum width so a realistic number of columns (3-4 dentists, or the
+ *    week view's 7 days) fits without being sliced at the page edge.
+ * The legend added above the grid isn't part of the scroll area, so it
+ * isn't affected by any of this — it stays a normal block sitting above
+ * the (now unclipped) grid, both on screen and on paper.
+ */
+@media print {
+  @page {
+    size: landscape;
+    margin: 10mm;
+  }
+
+  .planning-shell {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .planning-shell-row {
+    min-height: 0 !important;
+  }
+
+  .planning-page-root {
+    height: auto !important;
+  }
+
+  /* Un-clip the grid: let it grow to its full content height instead of
+     being boxed into the on-screen scroll viewport. */
+  .planning-view-root,
+  .planning-scroll {
+    flex: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Sticky headers have nothing to stick to once overflow is visible —
+     make them normal in-flow elements so they print once, in place,
+     instead of floating or repeating oddly across pages. */
+  .planning-sticky,
+  .planning-gutter {
+    position: static !important;
+  }
+
+  /* Keep enough columns on one printed page: narrower per-column minimum
+     than the screen layout, and let the row shrink to fit instead of
+     forcing horizontal overflow. */
+  .planning-columns-row {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .planning-column {
+    min-width: 130px !important;
+  }
+
+  /* Avoid slicing a day/practitioner column across a page break where
+     the browser can honor it. */
+  .planning-column {
+    break-inside: avoid;
+  }
 }

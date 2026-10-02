@@ -2,8 +2,9 @@
 
 import { EllipsisVertical, LogOut, CircleUser, Bell } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
-import { Logo } from "@/components/logo"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,13 +20,21 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useAuth } from "@/lib/auth"
 
 export function PatientNavUser({
   user,
 }: {
-  user: { name: string; email: string; avatar: string }
+  user: { name: string; email: string; avatarUrl?: string }
 }) {
   const { isMobile } = useSidebar()
+  const { logout } = useAuth()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await logout()
+    router.replace("/sign-in")
+  }
 
   return (
     <SidebarMenu>
@@ -36,9 +45,13 @@ export function PatientNavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg">
-                <Logo size={28} />
-              </div>
+              <Avatar className="h-8 w-8 rounded-lg">
+                {user.avatarUrl ? (
+                  <AvatarImage src={user.avatarUrl} alt={user.name} />
+                ) : (
+                  <AvatarFallback>{user.name?.[0] ?? "U"}</AvatarFallback>
+                )}
+              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="text-muted-foreground truncate text-xs">
@@ -56,9 +69,13 @@ export function PatientNavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <div className="h-8 w-8 rounded-lg">
-                  <Logo size={28} />
-                </div>
+                <Avatar className="h-8 w-8 rounded-lg">
+                  {user.avatarUrl ? (
+                    <AvatarImage src={user.avatarUrl} alt={user.name} />
+                  ) : (
+                    <AvatarFallback>{user.name?.[0] ?? "U"}</AvatarFallback>
+                  )}
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="text-muted-foreground truncate text-xs">
@@ -84,11 +101,10 @@ export function PatientNavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">
-              {/* TODO: wire to real sign-out (clear session) once auth exists */}
-              <Link href="/sign-in">
+              <button type="button" onClick={handleLogout} className="w-full">
                 <LogOut />
                 Log out
-              </Link>
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

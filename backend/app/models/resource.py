@@ -1,7 +1,7 @@
 import enum
 
-from sqlalchemy import Boolean, Enum, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Boolean, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
 from app.models.base import TimestampMixin, UUIDPKMixin
@@ -13,15 +13,12 @@ class ResourceType(str, enum.Enum):
 
 
 class Resource(UUIDPKMixin, TimestampMixin, Base):
-    """A chair or room that gets booked alongside a dentist for an appointment.
-
-    See dentapp-architecture-v2.md section 4.1: appointments reserve a
-    *resource* AND a *practitioner*, not one or the other.
+    """A chair or room an appointment can be attached to, in addition to
+    the practitioner — lets a clinic run several chairs/rooms in parallel.
     """
+
     __tablename__ = "resources"
 
-    name: Mapped[str] = mapped_column(String(100), nullable=False)
-    type: Mapped[ResourceType] = mapped_column(Enum(ResourceType, name="resource_type"), nullable=False)
-    active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
-
-    appointments: Mapped[list["Appointment"]] = relationship(back_populates="resource")
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    type: Mapped[str] = mapped_column(String(20), nullable=False)
+    active: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")

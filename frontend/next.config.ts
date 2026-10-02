@@ -4,7 +4,13 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
   },
-  turbopack: {},
+
+  // Explicitly set the Turbopack root to this project directory to avoid
+  // Next detecting lockfiles higher in the filesystem and to fix the
+  // "turbopack.root should be absolute" warning.
+  turbopack: {
+    root: process.cwd(),
+  },
 
   // Image optimization
   images: {

@@ -12,6 +12,8 @@ python-multipart==0.0.9
 redis==5.0.8
 email-validator==2.2.0
 python-dotenv==1.0.1
+aiosmtplib==5.1.2
+slowapi==0.1.9
 
 # --- Dev / tests ---
 pytest==8.3.3

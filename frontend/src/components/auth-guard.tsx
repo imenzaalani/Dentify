@@ -13,7 +13,11 @@ interface AuthGuardProps {
    * session (e.g. the patient portal, which doesn't use staff roles).
    */
   roles?: StaffRole[]
-  /** Where to send an unauthenticated visitor. */
+  /**
+   * Where to send an unauthenticated visitor. Defaults to the staff
+   * sign-in when `roles` is set (staff subtree), otherwise the patient
+   * sign-in. Pass explicitly to override.
+   */
   signInHref?: string
   /**
    * Where to send an authenticated-but-unauthorized visitor (wrong role).
@@ -25,30 +29,31 @@ interface AuthGuardProps {
 }
 
 /**
- * Wraps a layout/page subtree with a session + role check. Currently a
- * no-op most of the time (auth isn't wired up — see lib/rbac.ts) but gives
- * the app a single place to plug in real auth later instead of touching
- * every admin/patient page individually.
+ * Wraps a layout/page subtree with a session + role check, backed by the
+ * real auth context (see lib/rbac.ts / lib/auth.tsx). Single place to
+ * handle route protection instead of touching every admin/patient page.
  */
 export function AuthGuard({
   children,
   roles,
-  signInHref = "/auth/sign-in",
+  signInHref,
   forbiddenHref = "/staff/dashboard",
 }: AuthGuardProps) {
   const router = useRouter()
   const { isLoading, isAuthenticated, isAuthorized } = useAuthGuard({ roles })
 
+  const resolvedSignInHref = signInHref ?? (roles ? "/staff/sign-in" : "/auth/sign-in")
+
   React.useEffect(() => {
     if (isLoading) return
     if (!isAuthenticated) {
-      router.replace(signInHref)
+      router.replace(resolvedSignInHref)
       return
     }
     if (!isAuthorized) {
       router.replace(forbiddenHref)
     }
-  }, [isLoading, isAuthenticated, isAuthorized, router, signInHref, forbiddenHref])
+  }, [isLoading, isAuthenticated, isAuthorized, router, resolvedSignInHref, forbiddenHref])
 
   if (isLoading || !isAuthenticated || !isAuthorized) {
     return (

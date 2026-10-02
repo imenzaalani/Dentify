@@ -28,7 +28,8 @@ import {
 import { format, addDays, isBefore, startOfDay } from "date-fns"
 import { ModeToggle } from "@/components/mode-toggle"
 import { AuthBackground } from "@/app/(auth)/components/auth-background"
-import {Logo} from "@/components/logo"
+import { Logo } from "@/components/logo"
+import { leadApi } from "@/lib/api"
 
 // ── Practice info — edit these to match your real practice ────────────────
 const PRACTICE = {
@@ -249,6 +250,8 @@ export default function BookingPage() {
   const [bookingFor, setBookingFor] = useState<BookingFor>("myself")
   const [patient, setPatient] = useState<PatientInfo>(EMPTY_PATIENT)
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const today = startOfDay(new Date())
   const selectedType = APPOINTMENT_TYPES.find((t) => t.id === service)
@@ -283,10 +286,45 @@ export default function BookingPage() {
     /^\S+@\S+\.\S+$/.test(patient.email) &&
     patient.phone.trim().length > 5
 
-  const onConfirm = () => {
-    // TODO: call your backend API to create the appointment
-    // POST /api/appointments { service, bookingFor, date, slot, ...patient }
-    setSent(true)
+  const onConfirm = async () => {
+    if (!selectedType || !date || !slot) return
+    setError(null)
+    setSubmitting(true)
+
+    const serviceLabel = selectedType.label
+    const datetime = `${date.toISOString().slice(0, 10)}T${slot}:00`
+    const hearAboutValue = patient.hearAbout
+      ? patient.hearAbout === "Instagram/Facebook"
+        ? "instagram_facebook"
+        : patient.hearAbout === "Family/Friend"
+        ? "family_friend"
+        : patient.hearAbout === "Walk by"
+        ? "walk_by"
+        : patient.hearAbout.toLowerCase()
+      : undefined
+
+    try {
+      await leadApi.createLead({
+        requested_service: serviceLabel,
+        requested_datetime: datetime,
+        booking_for: bookingFor === "other" ? "someone_else" : bookingFor,
+        patient_first_name: patient.firstName,
+        patient_last_name: patient.lastName,
+        patient_legal_sex: patient.legalSex || null,
+        patient_dob: patient.dob,
+        patient_zip: patient.zip || null,
+        contact_email: patient.email,
+        contact_phone: patient.phone,
+        sms_consent: patient.consent,
+        comments: patient.comments || null,
+        hear_about_us: hearAboutValue || null,
+      })
+      setSent(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to submit your request.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(PRACTICE.address)}&output=embed`
@@ -677,15 +715,20 @@ export default function BookingPage() {
                     <p className="mb-4 text-xs text-slate-500 dark:text-white/50">
                       By clicking &quot;Book appointment,&quot; you agree to our Terms and Privacy Policy.
                     </p>
+                    {error && (
+                      <div className="mb-3 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950/20 dark:text-red-200">
+                        {error}
+                      </div>
+                    )}
                     <motion.button
                       type="button"
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={onConfirm}
-                      disabled={!patientComplete}
+                      disabled={!patientComplete || submitting}
                       className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-950/10 transition hover:bg-slate-900 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-50"
                     >
-                      Book appointment
+                      {submitting ? "Submitting…" : "Book appointment"}
                       <ArrowUpRight className="h-4 w-4" />
                     </motion.button>
                   </SectionCard>

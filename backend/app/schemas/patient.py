@@ -1,73 +1,130 @@
-import enum
-from datetime import date
+from __future__ import annotations
 
-from sqlalchemy import ARRAY, Boolean, Date, Enum, ForeignKey, String, Text
-from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+import uuid
+from datetime import datetime
+from pydantic import BaseModel, EmailStr
 
-from app.core.database import Base
-from app.models.base import TimestampMixin, UUIDPKMixin
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class PatientLifecycleStatus(str, enum.Enum):
-    """Cycle de vie du patient — dentapp-architecture-v2.md section 3."""
-    NEW = "new"                  # nouveau patient (1er RDV honoré)
-    ACTIVE = "active"            # traitement en cours / suivi régulier
-    MAINTENANCE = "maintenance"  # traitement terminé, rappel de contrôle
-    INACTIVE = "inactive"        # > 18-24 mois sans visite
-    ARCHIVED = "archived"        # archivage définitif (RGPD / départ)
+class PatientOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    patient_number: str
+    first_name: str
+    last_name: str
+    dob: str
+    phone: str | None
+    email: str | None
+    address: str | None
+    user_id: uuid.UUID | None
+    portal_status: str
+    avatar_url: str | None
+    primary_contact_user_id: uuid.UUID | None
+    preferred_contact_method: str | None
+    lifecycle_stage: str
+    created_via: str
+    no_show_count: int
+    allergies: list[str] | None
+    medical_history: str | None
+    current_medications: str | None
+    emergency_contact_name: str | None
+    emergency_contact_phone: str | None
+    archived_at: datetime | None
+    archived_by: uuid.UUID | None
+    archived_reason: str | None
+    created_by: uuid.UUID | None
+    updated_by: uuid.UUID | None
+    created_at: datetime
+    updated_at: datetime
 
 
-class Patient(UUIDPKMixin, TimestampMixin, Base):
-    __tablename__ = "patients"
+class NextAppointmentOut(BaseModel):
+    date: str  # ISO date, e.g. "2026-07-10"
+    time: str  # "HH:MM"
+    practitioner: str
+    type: str
+    status: str  # "confirmed" | "pending"
 
-    user_id: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("users.id"), unique=True, nullable=True
-    )
 
-    first_name: Mapped[str] = mapped_column(String(100), nullable=False)
-    last_name: Mapped[str] = mapped_column(String(100), nullable=False)
-    date_of_birth: Mapped[date | None] = mapped_column(Date, nullable=True)
-    gender: Mapped[str | None] = mapped_column(String(10), nullable=True)
+class PatientDashboardOut(BaseModel):
+    # treatment/notifications have no backing tables yet (see api/v1/__init__.py
+    # "next slices" note) — always null/empty until those slices exist, rather
+    # than faking data the frontend would treat as real.
+    nextAppointment: NextAppointmentOut | None
+    treatment: None
+    notifications: list = []
 
-    phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    phone_secondary: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    email: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    address: Mapped[str | None] = mapped_column(Text, nullable=True)
-    preferred_channel: Mapped[str | None] = mapped_column(String(20), nullable=True)  # whatsapp/email/sms
 
-    # --- Clinical (category: clinical_read / clinical_write) ---
-    blood_type: Mapped[str | None] = mapped_column(String(5), nullable=True)
-    allergies: Mapped[list[str]] = mapped_column(ARRAY(String), default=list, nullable=False)
-    chronic_conditions: Mapped[str | None] = mapped_column(Text, nullable=True)
-    current_medications: Mapped[str | None] = mapped_column(Text, nullable=True)
-    medical_history: Mapped[str | None] = mapped_column(Text, nullable=True)
+class PatientSelfOut(BaseModel):
+    """Patient-editable subset of their own record — the contact/medical
+    fields the patient portal profile page needs. Deliberately excludes
+    identity fields (name/email) which live on User and go through
+    /auth/me instead, and excludes staff-only fields (patient_number,
+    lifecycle_stage, archival, etc.)."""
 
-    emergency_contact_name: Mapped[str | None] = mapped_column(String(150), nullable=True)
-    emergency_contact_phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    model_config = ConfigDict(from_attributes=True)
 
-    notes_private: Mapped[str | None] = mapped_column(Text, nullable=True)  # never patient-visible
+    address: str | None
+    preferred_contact_method: str | None
+    allergies: list[str] | None
+    medical_history: str | None
+    current_medications: str | None
 
-    lifecycle_status: Mapped[PatientLifecycleStatus] = mapped_column(
-        Enum(PatientLifecycleStatus, name="patient_lifecycle_status"),
-        default=PatientLifecycleStatus.NEW,
-        nullable=False,
-    )
-    no_show_count: Mapped[int] = mapped_column(default=0, nullable=False)
-    is_archived: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
 
-    created_by: Mapped[PG_UUID | None] = mapped_column(
-        PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=True
-    )
+class PatientSelfUpdateRequest(BaseModel):
+    address: str | None = Field(None, max_length=500)
+    preferred_contact_method: str | None = Field(None, max_length=20)
+    allergies: list[str] | None = None
+    medical_history: str | None = Field(None, max_length=4000)
+    current_medications: str | None = Field(None, max_length=2000)
 
-    user: Mapped["User"] = relationship(back_populates="patient_profile", foreign_keys=[user_id])
+    model_config = ConfigDict(extra="forbid")
 
-    appointments: Mapped[list["Appointment"]] = relationship(back_populates="patient")
-    treatments: Mapped[list["Treatment"]] = relationship(back_populates="patient")
-    invoices: Mapped[list["Invoice"]] = relationship(back_populates="patient")
-    documents: Mapped[list["Document"]] = relationship(back_populates="patient")
-    referrals: Mapped[list["Referral"]] = relationship(back_populates="patient")
 
-    @property
-    def full_name(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+class PatientArchiveRequest(BaseModel):
+    reason: str | None = Field(None, max_length=255)
+
+
+class PatientUpdateRequest(BaseModel):
+    # Identity/contact fields — any staff (receptionist/dentist/owner) can write these.
+    first_name: str | None = Field(None, min_length=1, max_length=255)
+    last_name: str | None = Field(None, min_length=1, max_length=255)
+    dob: str | None = Field(None, min_length=1, max_length=50)
+    phone: str | None = Field(None, max_length=50)
+    email: EmailStr | None = None
+    address: str | None = Field(None, max_length=500)
+    legal_sex: str | None = Field(None, max_length=50)
+    zip_code: str | None = Field(None, max_length=30)
+    preferred_contact_method: str | None = Field(None, max_length=20)
+    emergency_contact_name: str | None = Field(None, max_length=255)
+    emergency_contact_phone: str | None = Field(None, max_length=50)
+
+    # Clinical fields — dentist/owner only (CLINICAL_WRITE in permissions.py).
+    allergies: list[str] | None = None
+    medical_history: str | None = Field(None, max_length=4000)
+    current_medications: str | None = Field(None, max_length=2000)
+
+    model_config = ConfigDict(extra="forbid")
+
+
+# Fields above that require CLINICAL_WRITE — checked in the router since
+# Pydantic alone can't gate by role.
+CLINICAL_UPDATE_FIELDS = {"allergies", "medical_history", "current_medications"}
+
+
+class PatientCreate(BaseModel):
+    first_name: str = Field(..., min_length=1, max_length=255)
+    last_name: str = Field(..., min_length=1, max_length=255)
+    dob: str = Field(..., min_length=1, max_length=50)
+    phone: str | None = Field(None, max_length=50)
+    email: EmailStr | None = Field(None, max_length=255)
+    address: str | None = Field(None, max_length=500)
+    preferred_contact_method: str | None = Field(None, max_length=20)
+    created_via: str = Field(default="online_form", max_length=50)
+    allergies: list[str] | None = None
+    medical_history: str | None = Field(None, max_length=4000)
+    current_medications: str | None = Field(None, max_length=2000)
+    emergency_contact_name: str | None = Field(None, max_length=255)
+    emergency_contact_phone: str | None = Field(None, max_length=50)
