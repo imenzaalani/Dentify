@@ -13,10 +13,10 @@ export function LogoCarousel() {
   const row = [...items, ...items]
 
   return (
-    <section className="relative z-10 overflow-hidden border-y border-border/40 bg-white/5 backdrop-blur-lg py-6 min-h-[96px] flex items-center">
+    <section className="relative z-10 overflow-hidden border-y border-border/40 bg-white/5 backdrop-blur-lg max-md:backdrop-blur-none py-6 min-h-[96px] flex items-center">
       <div
         className="flex items-center gap-12 whitespace-nowrap px-6 w-max"
-        style={{ animation: "marquee 30s linear infinite" }}
+        style={{ animation: "marquee 30s linear infinite", willChange: "transform" }}
       >
         {row.map((t, i) => (
           <span
