@@ -27,7 +27,7 @@ export function useTranslation(namespace?: string) {
       const template = resolve(messages, fullKey) ?? fullKey
       if (!vars) return template
       return Object.entries(vars).reduce(
-        (acc, [name, val]) => acc.replaceAll(`{${name}}`, String(val)),
+        (acc, [name, val]) => acc.split(`{${name}}`).join(String(val)),
         template
       )
     },

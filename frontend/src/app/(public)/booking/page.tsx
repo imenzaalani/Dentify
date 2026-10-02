@@ -30,6 +30,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { AuthBackground } from "@/app/(auth)/components/auth-background"
 import { Logo } from "@/components/logo"
 import { leadApi } from "@/lib/api"
+import type { HearAboutUs } from "@/types/lead"
 
 // ── Practice info — edit these to match your real practice ────────────────
 const PRACTICE = {
@@ -52,6 +53,14 @@ const APPOINTMENT_TYPES = [
 const TIME_SLOTS = ["09:00", "09:45", "10:30", "11:15", "12:00", "14:00", "14:45", "15:30", "17:00"] as const
 
 const HEAR_ABOUT_OPTIONS = ["Google", "Instagram/Facebook", "Yelp", "Family/Friend", "Walk by", "Other"] as const
+const HEAR_ABOUT_VALUES: Record<(typeof HEAR_ABOUT_OPTIONS)[number], HearAboutUs> = {
+  Google: "google",
+  "Instagram/Facebook": "instagram_facebook",
+  Yelp: "yelp",
+  "Family/Friend": "family_friend",
+  "Walk by": "walk_by",
+  Other: "other",
+}
 
 type BookingFor = "myself" | "dependent" | "other"
 
@@ -65,7 +74,7 @@ type PatientInfo = {
   phone: string
   consent: boolean
   comments: string
-  hearAbout: string | null
+  hearAbout: (typeof HEAR_ABOUT_OPTIONS)[number] | null
   hearAboutOther: string
 }
 
@@ -293,15 +302,7 @@ export default function BookingPage() {
 
     const serviceLabel = selectedType.label
     const datetime = `${date.toISOString().slice(0, 10)}T${slot}:00`
-    const hearAboutValue = patient.hearAbout
-      ? patient.hearAbout === "Instagram/Facebook"
-        ? "instagram_facebook"
-        : patient.hearAbout === "Family/Friend"
-        ? "family_friend"
-        : patient.hearAbout === "Walk by"
-        ? "walk_by"
-        : patient.hearAbout.toLowerCase()
-      : undefined
+    const hearAboutValue = patient.hearAbout ? HEAR_ABOUT_VALUES[patient.hearAbout] : undefined
 
     try {
       await leadApi.createLead({
@@ -317,7 +318,7 @@ export default function BookingPage() {
         contact_phone: patient.phone,
         sms_consent: patient.consent,
         comments: patient.comments || null,
-        hear_about_us: hearAboutValue || null,
+        hear_about_us: hearAboutValue ?? null,
       })
       setSent(true)
     } catch (err) {

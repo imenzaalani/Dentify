@@ -7,10 +7,10 @@ const PROXY_BASE = "/api/backend"
 // Avatars are served directly off the backend's static /avatars mount and
 // aren't behind auth, so image URLs point straight at the real backend
 // origin rather than through the proxy.
-const BACKEND_ORIGIN = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1").replace(
-  /\/api\/v1\/?$/,
-  ""
-)
+const BACKEND_ORIGIN =
+  process.env.NODE_ENV === "development"
+    ? (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1").replace(/\/api\/v1\/?$/, "")
+    : ""
 
 // Turns a relative path returned by the API (e.g. "/avatars/xyz.jpg") into an
 // absolute URL the browser can load directly in an <img> tag. Passing an

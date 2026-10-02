@@ -3,7 +3,9 @@ export const dynamic = "force-dynamic"
 import { NextRequest, NextResponse } from "next/server"
 import { clearAuthCookies, readAuthCookies, setAuthCookies } from "@/lib/server/auth-cookies"
 
-const API_URL = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1"
+const API_URL = process.env.BACKEND_URL
+  ? `${process.env.BACKEND_URL.replace(/\/+$/, "")}/api/v1`
+  : process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1"
 
 async function tryRefresh(refreshToken: string): Promise<{ access_token: string; refresh_token: string } | null> {
   const res = await fetch(`${API_URL}/auth/refresh`, {
