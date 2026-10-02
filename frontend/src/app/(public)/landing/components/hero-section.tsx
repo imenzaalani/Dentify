@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useMotionValueEvent,
 } from "motion/react"
-import { ArrowUpRight, ChevronUp } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { ease } from "./primitives"
 
 function Tooth({ className = "" }: { className?: string }) {
@@ -168,15 +168,6 @@ export function HeroSection() {
     return () => window.removeEventListener("mousemove", on)
   }, [mpX, mpY])
 
-  const [showTop, setShowTop] = useState(false)
-  useEffect(() => {
-    const onScrollTop = () =>
-      setShowTop(window.scrollY > window.innerHeight * 0.3)
-    onScrollTop()
-    window.addEventListener("scroll", onScrollTop, { passive: true })
-    return () => window.removeEventListener("scroll", onScrollTop)
-  }, [])
-
   return (
     <section
       id="top"
@@ -324,20 +315,6 @@ export function HeroSection() {
         </div>
         <div className="w-0" />
       </motion.div>
-
-      {/* Back to top */}
-      <button
-        type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
-        className={`fixed right-6 bottom-6 md:right-10 md:bottom-10 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground border border-primary/40 shadow-2xl transform-gpu transition-all duration-200 ${
-          showTop
-            ? "opacity-100 translate-y-0 scale-100"
-            : "opacity-0 translate-y-6 scale-95 pointer-events-none"
-        }`}
-      >
-        <ChevronUp className="h-6 w-6" />
-      </button>
 
       {/* Bottom fade */}
       <div

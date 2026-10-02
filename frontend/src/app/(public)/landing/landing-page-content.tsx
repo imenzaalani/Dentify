@@ -11,6 +11,7 @@ import { ContactSection } from "@/app/(public)/landing/components/contact-sectio
 import { LandingFooter } from "@/app/(public)/landing/components/footer"
 import { ClinicSection } from "@/app/(public)/landing/components/clinic-section"
 import { ResultsSection } from "@/app/(public)/landing/components/results-section"
+import { BackToTop } from "@/app/(public)/landing/components/back-to-top"
 
 export function LandingPageContent() {
   return (
@@ -29,6 +30,7 @@ export function LandingPageContent() {
       </main>
       <div className="bg-gradient-to-b from-transparent to-slate-50 dark:to-slate-950 h-20" />
       <LandingFooter />
+      <BackToTop />
     </div>
   )
 }

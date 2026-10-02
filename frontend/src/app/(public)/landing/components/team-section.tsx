@@ -42,23 +42,23 @@ function DoctorCard({
           <motion.img
             src={doc.img}
             alt={doc.name}
-            className="h-80 w-full object-cover transition duration-700"
+            className="h-72 w-full object-cover object-top transition duration-700 sm:h-80"
             animate={{ scale: hovered ? 1.05 : 1.0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
         </div>
 
-        <div className="space-y-4 p-6 text-left">
-          <div className="flex items-center justify-between text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
-            <span>Doctor {index + 1}</span>
-            <span className="rounded-full border border-slate-200 px-3 py-1 text-[11px] font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">
-              {doc.years} yrs
+        <div className="space-y-3 p-5 text-left sm:space-y-4 sm:p-6">
+          <div className="flex items-center justify-between gap-2 text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 sm:tracking-[0.24em]">
+            <span className="whitespace-nowrap">Doctor {index + 1}</span>
+            <span className="shrink-0 whitespace-nowrap rounded-full border border-slate-200 px-3 py-1 text-[11px] font-semibold normal-case tracking-normal text-slate-700 dark:border-slate-700 dark:text-slate-300">
+              {doc.years}
             </span>
           </div>
 
           <div>
-            <div className="text-2xl font-semibold text-slate-950 dark:text-white">
+            <div className="text-xl font-semibold text-slate-950 sm:text-2xl dark:text-white">
               {doc.name}
             </div>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
@@ -117,7 +117,7 @@ export function TeamSection({ showLink = true, showHeader = true }: { showLink?:
         )}
 
         <Stagger
-          className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-5"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3"
           delay={0.07}
         >
           {team.map((doc, i) => (
