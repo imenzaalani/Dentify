@@ -24,12 +24,12 @@ export function LandingNavbar({ lightMode = false }: { lightMode?: boolean }) {
     return () => window.removeEventListener("scroll", on)
   }, [])
 
-  const baseNavClasses = "max-w-6xl w-full flex items-center justify-between rounded-full px-5 py-3 transition-all duration-300"
+  const baseNavClasses = "max-w-6xl w-full flex items-center justify-between rounded-full px-5 py-3 transition-[background-color,border-color,color,box-shadow] duration-300"
   const navStyle = scrolled
-    ? "bg-background/80 backdrop-blur-xl border border-border shadow-sm"
+    ? "bg-background/90 backdrop-blur-xl max-md:backdrop-blur-none border border-border shadow-sm"
     : lightMode
     ? "bg-white/90 border border-slate-200 shadow-sm dark:bg-white/5 dark:border-white/10"
-    : "bg-white/5 backdrop-blur-md border border-white/10 dark:bg-white/5 dark:border-white/10"
+    : "bg-white/5 backdrop-blur-md max-md:backdrop-blur-none border border-white/10 dark:bg-white/5 dark:border-white/10"
   const navText = scrolled
     ? "text-muted-foreground"
     : lightMode

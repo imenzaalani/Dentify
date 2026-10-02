@@ -138,6 +138,36 @@
   }
 }
 
+@media (max-width: 767px) {
+  .landing-hero-glow,
+  .landing-tooth-halo {
+    display: none;
+  }
+
+  .landing-tooth-float {
+    animation: none !important;
+  }
+
+  .landing-tooth-svg {
+    filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
   /* nav glass utilities for theme-aware nav */
   .nav-glass {
     border-radius: 9999px;

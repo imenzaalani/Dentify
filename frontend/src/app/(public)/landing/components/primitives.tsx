@@ -1,17 +1,16 @@
 "use client"
 
 import { useRef, type ReactNode } from "react"
-import { motion, useInView } from "motion/react"
+import { motion, useInView, useReducedMotion } from "motion/react"
 
 export const ease = [0.22, 1, 0.36, 1] as const
 
 export const itemVariants = {
-  hidden: { opacity: 0, y: 36, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease },
+    transition: { duration: 0.55, ease },
   },
 }
 
@@ -28,12 +27,13 @@ export function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: "-80px" })
+  const shouldReduceMotion = useReducedMotion()
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-      transition={{ duration: 0.9, ease, delay }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: Math.min(y, 24) }}
+      animate={shouldReduceMotion || inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.6, ease, delay: shouldReduceMotion ? 0 : delay }}
       className={className}
     >
       {children}
@@ -52,11 +52,12 @@ export function Stagger({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: "-60px" })
+  const shouldReduceMotion = useReducedMotion()
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      initial={shouldReduceMotion ? false : "hidden"}
+      animate={shouldReduceMotion || inView ? "show" : "hidden"}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: delay, delayChildren: 0.1 } },

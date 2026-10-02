@@ -120,11 +120,19 @@ export function HeroSection() {
 
   const { scrollY } = useScroll()
   const [vh, setVh] = useState(900)
+  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const u = () => setVh(window.innerHeight)
+    const media = window.matchMedia("(max-width: 767px)")
+    const updateMobile = () => setIsMobile(media.matches)
     u()
+    updateMobile()
     window.addEventListener("resize", u)
-    return () => window.removeEventListener("resize", u)
+    media.addEventListener("change", updateMobile)
+    return () => {
+      window.removeEventListener("resize", u)
+      media.removeEventListener("change", updateMobile)
+    }
   }, [])
 
   const toothScale = useTransform(scrollY, [0, vh * 1.4], [1, 5.5])
@@ -134,6 +142,8 @@ export function HeroSection() {
 
   const [mp, setMp] = useState({ x: 0, y: 0 })
   useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)")
+    if (!media.matches) return
     const on = (e: MouseEvent) => {
       setMp({
         x: (e.clientX / window.innerWidth - 0.5) * 2,
@@ -183,7 +193,7 @@ export function HeroSection() {
       {/* Mouse parallax glow */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        className="landing-hero-glow pointer-events-none absolute inset-0 overflow-hidden"
         style={{ x: mp.x * 30, y: mp.y * 30 }}
       >
         <div className="absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.55_0.22_240)]/20 blur-[160px]" />
@@ -193,20 +203,20 @@ export function HeroSection() {
       <motion.div
         aria-hidden
         style={{
-          y: toothY,
-          scale: toothScale,
-          rotate: toothRotate,
+          y: isMobile ? 0 : toothY,
+          scale: isMobile ? 1 : toothScale,
+          rotate: isMobile ? 0 : toothRotate,
           opacity: toothOpacity,
-          x: mp.x * -40,
+          x: isMobile ? 0 : mp.x * -40,
         }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.8, ease, delay: 0.1 }}
         className="pointer-events-none fixed left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2 will-change-transform"
       >
-        <div className="relative" style={{ animation: "floatY 4s ease-in-out infinite" }}>
-          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.6_0.22_240)]/30 blur-[100px]" />
-          <Tooth className="relative h-[300px] w-[260px] drop-shadow-[0_30px_80px_oklch(0.4_0.18_240/0.55)] sm:h-[420px] sm:w-[360px]" />
+        <div className="landing-tooth-float relative" style={{ animation: "floatY 4s ease-in-out infinite" }}>
+          <div className="landing-tooth-halo absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.6_0.22_240)]/30 blur-[100px]" />
+          <Tooth className="landing-tooth-svg relative h-[300px] w-[260px] drop-shadow-[0_30px_80px_oklch(0.4_0.18_240/0.55)] sm:h-[420px] sm:w-[360px]" />
         </div>
       </motion.div>
 
