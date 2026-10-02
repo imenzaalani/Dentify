@@ -90,7 +90,7 @@ export function ResultsSection() {
                 style={{ filter: "grayscale(0.7) brightness(0.85) contrast(0.9)" }}
               />
             </div>
-            <div className="absolute top-4 left-4 rounded-full bg-foreground/70 px-3 py-1 text-xs uppercase tracking-wider text-background backdrop-blur">
+            <div className="absolute top-4 left-4 rounded-full bg-foreground/70 px-3 py-1 text-xs uppercase tracking-wider text-background backdrop-blur max-md:backdrop-blur-none">
               Before
             </div>
             <div className="absolute top-4 right-4 rounded-full bg-primary px-3 py-1 text-xs uppercase tracking-wider text-primary-foreground">

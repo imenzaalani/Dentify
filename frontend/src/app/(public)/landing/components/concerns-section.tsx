@@ -26,11 +26,11 @@ export function ConcernsSection() {
             {/* Blobs */}
             <div
               aria-hidden
-              className="absolute -top-32 -right-32 h-[400px] w-[400px] rounded-full bg-primary/30 blur-[120px] pointer-events-none"
+              className="absolute -top-32 -right-32 h-[400px] w-[400px] rounded-full bg-primary/30 blur-[120px] max-md:hidden pointer-events-none"
             />
             <div
               aria-hidden
-              className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-[oklch(0.65_0.18_230)]/25 blur-[120px] pointer-events-none"
+              className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-[oklch(0.65_0.18_230)]/25 blur-[120px] max-md:hidden pointer-events-none"
             />
 
             <div className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
@@ -72,7 +72,7 @@ export function ConcernsSection() {
 
               {/* Right — simple form */}
               <div>
-                <form onSubmit={onSubmit} className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/8 p-6 backdrop-blur-md sm:p-8 text-slate-950 dark:text-white">
+                <form onSubmit={onSubmit} className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/8 p-6 backdrop-blur-md max-md:backdrop-blur-none sm:p-8 text-slate-950 dark:text-white">
                   {sent ? (
                     <div className="flex flex-col items-center gap-4 py-12 text-center">
                       <div className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground">

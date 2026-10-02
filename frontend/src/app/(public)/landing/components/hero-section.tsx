@@ -10,6 +10,7 @@ import {
 } from "motion/react"
 import { ArrowUpRight } from "lucide-react"
 import { ease } from "./primitives"
+import { useIsMobile } from "./use-is-mobile"
 
 function Tooth({ className = "" }: { className?: string }) {
   return (
@@ -109,36 +110,24 @@ function Tooth({ className = "" }: { className?: string }) {
 //   )
 // }
 
-export function HeroSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  })
-  const yText = useTransform(scrollYProgress, [0, 1], [0, -80])
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
-
+/**
+ * Desktop-only effects: mouse-parallax glow + the big scroll-driven floating tooth.
+ * Not mounted on mobile, so none of these scroll/mouse hooks run there.
+ */
+function DesktopHeroFx() {
   const { scrollY } = useScroll()
   const [vh, setVh] = useState(900)
-  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     let width = window.innerWidth
     const onResize = () => {
-      // Mobile browser chrome changes height while scrolling; only update for width changes.
+      // Only react to width changes (mobile-style URL bar resizes are ignored).
       if (window.innerWidth === width) return
       width = window.innerWidth
       setVh(window.innerHeight)
     }
-    const media = window.matchMedia("(max-width: 767px)")
-    const updateMobile = () => setIsMobile(media.matches)
     setVh(window.innerHeight)
-    updateMobile()
     window.addEventListener("resize", onResize)
-    media.addEventListener("change", updateMobile)
-    return () => {
-      window.removeEventListener("resize", onResize)
-      media.removeEventListener("change", updateMobile)
-    }
+    return () => window.removeEventListener("resize", onResize)
   }, [])
 
   const toothScale = useTransform(scrollY, [0, vh * 1.4], [1, 5.5])
@@ -169,6 +158,52 @@ export function HeroSection() {
   }, [mpX, mpY])
 
   return (
+    <>
+      {/* Mouse parallax glow */}
+      <motion.div
+        aria-hidden
+        className="landing-hero-glow pointer-events-none absolute inset-0 overflow-hidden"
+        style={{ x: glowX, y: glowY }}
+      >
+        <div className="absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.55_0.22_240/0.22),transparent_65%)]" />
+      </motion.div>
+
+      {/* Floating tooth */}
+      <motion.div
+        aria-hidden
+        style={{
+          y: toothY,
+          scale: toothScale,
+          rotate: toothRotate,
+          opacity: toothOpacity,
+          x: toothX,
+          visibility: toothGone ? "hidden" : "visible",
+        }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.8, ease, delay: 0.1 }}
+        className="pointer-events-none fixed left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+      >
+        <div className="landing-tooth-float relative" style={{ animation: "floatY 4s ease-in-out infinite", willChange: "transform" }}>
+          <div className="landing-tooth-halo absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.6_0.22_240/0.35),transparent_70%)]" />
+          <Tooth className="landing-tooth-svg relative h-[300px] w-[260px] sm:drop-shadow-[0_30px_80px_oklch(0.4_0.18_240/0.55)] sm:h-[420px] sm:w-[360px]" />
+        </div>
+      </motion.div>
+    </>
+  )
+}
+
+export function HeroSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  })
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -80])
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
+
+  return (
     <section
       id="top"
       ref={ref}
@@ -195,40 +230,20 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-y-0 right-0 w-[26%] bg-[radial-gradient(circle_at_right,rgba(0,0,0,0.22),transparent_55%)] dark:bg-[radial-gradient(circle_at_right,rgba(0,0,0,0.35),transparent_55%)]"
       />
 
-      {/* Mouse parallax glow */}
-      <motion.div
-        aria-hidden
-        className="landing-hero-glow pointer-events-none absolute inset-0 overflow-hidden"
-        style={{ x: glowX, y: glowY }}
-      >
-          <div className="absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.55_0.22_240/0.22),transparent_65%)]" />
-      </motion.div>
-
-      {/* Floating tooth */}
-      <motion.div
-        aria-hidden
-        style={{
-          y: isMobile ? 0 : toothY,
-          scale: isMobile ? 1 : toothScale,
-          rotate: isMobile ? 0 : toothRotate,
-          opacity: toothOpacity,
-          x: isMobile ? 0 : toothX,
-          visibility: toothGone ? "hidden" : "visible",
-        }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.8, ease, delay: 0.1 }}
-        className="pointer-events-none fixed left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2 will-change-transform"
-      >
-        <div className="landing-tooth-float relative" style={{ animation: "floatY 4s ease-in-out infinite", willChange: "transform" }}>
-          <div className="landing-tooth-halo absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.6_0.22_240/0.35),transparent_70%)]" />
-          <Tooth className="landing-tooth-svg relative h-[300px] w-[260px] sm:drop-shadow-[0_30px_80px_oklch(0.4_0.18_240/0.55)] sm:h-[420px] sm:w-[360px]" />
+      {/* Desktop: scroll + mouse driven effects. Mobile: one static, non-animated tooth. */}
+      {isMobile === false && <DesktopHeroFx />}
+      {isMobile === true && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2 opacity-90"
+        >
+          <Tooth className="relative h-[300px] w-[260px]" />
         </div>
-      </motion.div>
+      )}
 
       {/* Hero text */}
       <motion.div
-        style={{ opacity, y: yText }}
+        style={isMobile ? undefined : { opacity, y: yText }}
         className="relative z-20 mx-auto max-w-5xl px-6 text-center mt-10 sm:mt-14"
       >
         <h1

@@ -3,6 +3,7 @@
 import { motion } from "motion/react"
 import { Quote } from "lucide-react"
 import { Reveal, Stagger, itemVariants } from "./primitives"
+import { useIsMobile } from "./use-is-mobile"
 
 const list = [
   {
@@ -41,6 +42,7 @@ const rotations = [-3, 1.5, -2, 2.5, -1.5, 3]
 const offsets = [0, 40, 20, 60, 10, 50]
 
 export function TestimonialsSection() {
+  const isMobile = useIsMobile()
   return (
     <section className="relative z-10 overflow-hidden px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl">
@@ -67,13 +69,17 @@ export function TestimonialsSection() {
             <motion.figure
               key={i}
               variants={itemVariants}
-              whileHover={{
-                rotate: 0,
-                y: -8,
-                scale: 1.02,
-                zIndex: 10,
-                transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-              }}
+              whileHover={
+                isMobile
+                  ? undefined
+                  : {
+                      rotate: 0,
+                      y: -8,
+                      scale: 1.02,
+                      zIndex: 10,
+                      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                    }
+              }
               style={{
                 rotate: rotations[i],
                 marginTop: offsets[i],

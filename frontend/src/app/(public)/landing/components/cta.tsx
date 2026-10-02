@@ -30,8 +30,8 @@ export function CTASection({
         <Reveal>
           <div className="relative overflow-hidden rounded-[2.5rem] bg-foreground p-10 text-background noise sm:p-16 dark:bg-[linear-gradient(135deg,#0f5ebd_0%,#1683f0_45%,#5fb8ff_100%)] dark:text-white">
             {/* Light-mode glow blobs */}
-            <div aria-hidden className="absolute -top-32 -right-32 h-[400px] w-[400px] rounded-full bg-primary/40 blur-[120px] dark:hidden" />
-            <div aria-hidden className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-[oklch(0.65_0.18_270)]/40 blur-[120px] dark:hidden" />
+            <div aria-hidden className="absolute -top-32 -right-32 h-[400px] w-[400px] rounded-full bg-primary/40 blur-[120px] max-md:hidden dark:hidden" />
+            <div aria-hidden className="absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-[oklch(0.65_0.18_270)]/40 blur-[120px] max-md:hidden dark:hidden" />
 
             {/* Dark-mode grid texture + vignettes — matches hero/BannerHero treatment */}
             <div

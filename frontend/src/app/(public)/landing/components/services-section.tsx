@@ -13,6 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { Reveal, Stagger, itemVariants } from "./primitives"
+import { useIsMobile } from "./use-is-mobile"
 
 const services = [
   {
@@ -48,6 +49,7 @@ const services = [
 ]
 
 export function ServicesSection() {
+  const isMobile = useIsMobile()
   return (
     <section id="services" className="relative z-10 px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl">
@@ -89,7 +91,7 @@ export function ServicesSection() {
             <Link key={s.title} href="/service-details">
               <motion.article
                 variants={itemVariants}
-                whileHover={{ y: -6 }}
+                whileHover={isMobile ? undefined : { y: -6 }}
                 transition={{ type: "spring", stiffness: 260, damping: 22 }}
                 className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_4px_24px_-8px_oklch(0.16_0.04_265/0.12)] transition-all hover:shadow-[0_30px_80px_-30px_oklch(0.16_0.04_265/0.25)] dark:border-white/15 dark:bg-[oklch(0.16_0.05_220)] dark:hover:shadow-[0_30px_80px_-30px_oklch(0.62_0.28_215/0.3)] cursor-pointer"
               >

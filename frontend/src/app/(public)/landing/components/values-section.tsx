@@ -33,7 +33,7 @@ export function ValuesSection() {
               className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-shadow hover:shadow-[0_30px_80px_-30px_oklch(0.16_0.04_265/0.25)] dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20 dark:hover:bg-white/[0.05] dark:hover:shadow-[0_30px_80px_-30px_rgba(56,130,246,0.35)] sm:p-10"
             >
               {/* Dark-mode-only glow that appears on hover, anchored behind the icon */}
-              <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-sky-400/0 blur-[60px] transition-colors duration-500 group-hover:bg-sky-400/20 dark:block hidden" />
+              <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-sky-400/0 blur-[60px] max-md:hidden transition-colors duration-500 group-hover:bg-sky-400/20 dark:block hidden" />
 
               <div className="relative mb-10 grid h-12 w-12 place-items-center rounded-2xl bg-mist text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground dark:bg-white/[0.06] dark:text-sky-300 dark:ring-1 dark:ring-white/10 dark:group-hover:bg-sky-400 dark:group-hover:text-[#0a1224] dark:group-hover:ring-sky-400/40">
                 <v.icon className="h-5 w-5" strokeWidth={1.6} />

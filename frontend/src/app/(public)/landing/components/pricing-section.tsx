@@ -114,7 +114,7 @@ export function PricingSection() {
                   key={index}
                   className={`p-8 grid grid-rows-subgrid row-span-4 gap-6 ${
                     plan.popular
-                      ? 'my-2 mx-4 rounded-xl bg-card border-transparent shadow-xl ring-1 ring-foreground/10 backdrop-blur'
+                      ? 'my-2 mx-4 rounded-xl bg-card border-transparent shadow-xl ring-1 ring-foreground/10 backdrop-blur max-md:backdrop-blur-none'
                       : ''
                   }`}
                 >

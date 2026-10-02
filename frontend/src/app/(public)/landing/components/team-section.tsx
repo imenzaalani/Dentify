@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { motion, } from "motion/react"
 import { ArrowUpRight, ArrowRight } from "lucide-react"
@@ -28,23 +27,18 @@ function DoctorCard({
   doc: (typeof team)[0]
   index: number
 }) {
-  const [hovered, setHovered] = useState(false)
-
   return (
     <Link href="/dentist-details">
       <motion.article
         variants={itemVariants}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        className="group cursor-pointer overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl dark:border-slate-800 dark:bg-slate-950"
+        className="group cursor-pointer overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl transition duration-300 md:hover:-translate-y-1 hover:shadow-2xl dark:border-slate-800 dark:bg-slate-950"
       >
         <div className="relative overflow-hidden bg-slate-100 dark:bg-slate-900">
-          <motion.img
+          <img
             src={doc.img}
             alt={doc.name}
-            className="h-72 w-full object-cover object-top transition duration-700 sm:h-80"
-            animate={{ scale: hovered ? 1.05 : 1.0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            loading="lazy"
+            className="h-72 w-full object-cover object-top transition-transform duration-700 ease-out sm:h-80 md:group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
         </div>

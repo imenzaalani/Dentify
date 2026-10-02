@@ -53,8 +53,8 @@ export function LandingFooter() {
 
       {/* Ambient blobs for depth — dark mode only */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden hidden dark:block">
-        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-[#5bc0ff]/20 blur-[140px]" />
-        <div className="absolute top-12 -right-32 h-[620px] w-[620px] rounded-full bg-[#5bc0ff]/28 blur-[160px]" />
+        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(91,192,255,0.20),transparent_70%)]" />
+        <div className="absolute top-12 -right-32 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(91,192,255,0.28),transparent_70%)]" />
         <div className="absolute inset-x-0 bottom-0 h-[420px] bg-[radial-gradient(circle_at_50%_90%,rgba(91,192,255,0.18),transparent_65%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_0.8px,transparent_1px)] [background-size:60px_60px] opacity-[0.035]" />
       </div>
@@ -74,7 +74,7 @@ export function LandingFooter() {
               e.preventDefault()
               if (email) setSubscribed(true)
             }}
-            className="flex w-full max-w-md items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-2 backdrop-blur-xl dark:border-white/15 dark:bg-white/5"
+            className="flex w-full max-w-md items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-2 backdrop-blur-xl max-md:backdrop-blur-none dark:border-white/15 dark:bg-white/5"
           >
             <Mail className="ml-3 h-4 w-4 shrink-0 text-slate-400 dark:text-white/40" />
             {subscribed ? (

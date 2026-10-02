@@ -94,7 +94,7 @@ function MapCard() {
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
       {/* Bottom-left placement — clear of Google's own top-left marker popup */}
       <div className="pointer-events-none absolute inset-x-4 bottom-4 sm:inset-x-6 sm:bottom-6">
-        <div className="pointer-events-auto inline-block max-w-xs rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lg backdrop-blur dark:bg-[oklch(0.16_0.05_220)]/95">
+        <div className="pointer-events-auto inline-block max-w-xs rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lg backdrop-blur max-md:backdrop-blur-none dark:bg-[oklch(0.16_0.05_220)]/95">
           <p className="text-sm font-semibold text-foreground">Dentify Dental Studio</p>
           <p className="mt-0.5 text-xs text-muted-foreground">{ADDRESS}</p>
         </div>

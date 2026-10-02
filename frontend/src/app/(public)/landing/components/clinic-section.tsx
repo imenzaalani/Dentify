@@ -1,11 +1,13 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "motion/react"
 import { Reveal } from "./primitives"
+import { useIsMobile } from "./use-is-mobile"
 
 const clinicImage = "/clinic.jpg"
 
 export function ClinicSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -14,11 +16,12 @@ export function ClinicSection() {
   const y = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
 
   return (
-    <section ref={ref} className="relative z-10 h-[100vh] overflow-hidden">
+    <section ref={ref} className="relative z-10 h-[100svh] overflow-hidden">
       {/* Image — 180% tall, centered, lots to reveal */}
+      {/* Parallax only on desktop; on mobile the image is static (no per-frame scroll work) */}
       <motion.div
-        className="absolute inset-0 w-full -top-[40%]"
-        style={{ y, height: "180%" }}
+        className={isMobile ? "absolute inset-0 w-full" : "absolute inset-0 w-full -top-[40%]"}
+        style={isMobile ? undefined : { y, height: "180%" }}
       >
         <img
           src={clinicImage}
