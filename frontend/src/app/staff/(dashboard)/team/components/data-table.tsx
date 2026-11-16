@@ -422,7 +422,8 @@ export function DataTable({
     },
   })
 
-  const specialtyFilter = table.getColumn("specialty")?.getFilterValue() as string
+  const specialtyColumn = showSpecialtyColumn ? table.getColumn("specialty") : undefined
+  const specialtyFilter = specialtyColumn?.getFilterValue() as string | undefined
   const statusFilter = table.getColumn("status")?.getFilterValue() as string
 
   const handleExport = () => {
@@ -504,7 +505,7 @@ export function DataTable({
             <Select
               value={specialtyFilter || "all"}
               onValueChange={(value) =>
-                table.getColumn("specialty")?.setFilterValue(value === "all" ? "" : value)
+                specialtyColumn?.setFilterValue(value === "all" ? "" : value)
               }
             >
               <SelectTrigger className="cursor-pointer h-8 w-auto min-w-36 border-none bg-background shadow-none text-sm">
@@ -542,7 +543,7 @@ export function DataTable({
               size="sm"
               className="cursor-pointer h-8 px-2 text-sm text-muted-foreground"
               onClick={() => {
-                table.getColumn("specialty")?.setFilterValue("")
+                specialtyColumn?.setFilterValue("")
                 table.getColumn("status")?.setFilterValue("")
               }}
             >
